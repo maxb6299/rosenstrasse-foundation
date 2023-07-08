@@ -6,9 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+const testimonyDatabase = require("./routes/testimonyDatabase");
+app.use("/testimonies", testimonyDatabase);
+
+const teamMemberDatabase = require("./routes/teamMemberDatabase");
+app.use("/team-members", teamMemberDatabase);
 
 const PORT = 3000;
 app.listen(PORT, () => {
