@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
     res.setHeader("Content-Type", "application/json");
 
     res.send(data);
+    res.status(200);
     console.log("JSON sent in GET request");
   } catch (error) {
     res.status(500);
@@ -33,6 +34,7 @@ router.get("/:id/image", async (req, res) => {
     if (item) {
       absolutePath = path.resolve(item.imagePath);
       res.sendFile(absolutePath);
+      res.status(200);
       console.log("Image sent in GET request");
     } else {
       res.status(404);
@@ -49,6 +51,7 @@ router.post("/", async (req, res) => {
     const updatedData = JSON.stringify(req.body);
 
     await writeFile(FILE_PATH, updatedData, "utf8");
+    res.status(200);
     console.log("JSON updated in POST request");
   } catch (error) {
     res.status(500);
@@ -76,6 +79,7 @@ router.post("/appendItem", async (req, res) => {
     const updatedData = JSON.stringify(parsedData);
 
     await writeFile(FILE_PATH, updatedData, "utf8");
+    res.status(200);
     console.log("Object appended in POST request");
   } catch (error) {
     res.status(500);
@@ -141,6 +145,7 @@ router.delete("/:id", async (req, res) => {
       parsedData.splice(itemIndex, 1); // deletes item
       const updatedData = JSON.stringify(parsedData, null, 2);
       await writeFile(FILE_PATH, updatedData, "utf8");
+      res.status(200);
       console.log("Item sucessfully deleted");
     } else {
       res.status(404);
