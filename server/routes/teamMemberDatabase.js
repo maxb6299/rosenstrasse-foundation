@@ -42,6 +42,18 @@ router.get("/:id/image", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const updatedData = JSON.stringify(req.body);
+
+    await writeFile(FILE_PATH, updatedData, "utf8");
+    console.log("JSON updated in POST request");
+  } catch (error) {
+    res.status(500);
+    console.error("Error sending POST request", error);
+  }
+});
+
 router.post("/appendItem", async (req, res) => {
   try {
     const data = await readFile(FILE_PATH, "utf8");
@@ -66,6 +78,15 @@ router.post("/appendItem", async (req, res) => {
   } catch (error) {
     res.status(500);
     console.error("Error sending POST request for specific id", error);
+  }
+});
+
+router.post("/:id/image", async (req, res) => {
+  try {
+    const id = req.params.id;
+  } catch (error) {
+    res.status(500);
+    console.error("Error sending image t", error);
   }
 });
 
