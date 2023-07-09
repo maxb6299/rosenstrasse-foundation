@@ -42,6 +42,33 @@ router.get("/:id/image", async (req, res) => {
   }
 });
 
+router.post("/appendItem", async (req, res) => {
+  try {
+    const data = await readFile(FILE_PATH, "utf8");
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(data);
+    } catch (error) {
+      console.error(
+        "Error parsing data for POST request for specific id",
+        error
+      );
+      res.status(500);
+      return;
+    }
+
+    parsedData.push(req.body);
+    const updatedData = JSON.stringify(parsedData);
+
+    await writeFile(FILE_PATH, updatedData, "utf8");
+    console.log("Object appended in POST request");
+  } catch (error) {
+    res.status(500);
+    console.error("Error sending POST request for specific id", error);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -56,7 +83,7 @@ router.delete("/:id", async (req, res) => {
       try {
         absoluteImagePath = path.resolve(item.imagePath);
         await unlink(absoluteImagePath);
-        console.log("Image successfully deleted");
+        console.log("Image sucessfully deleted");
       } catch (error) {
         console.error("Error deleting file", error);
       }
