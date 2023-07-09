@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
-const { readFile, writeFile } = require("fs/promises");
+const multer = require("multer");
+const upload = multer({ dest: "./database/team-members/images" });
+const { readFile, writeFile, rename } = require("fs/promises");
 const { unlink } = require("fs").promises;
 const router = express.Router();
 
@@ -81,12 +83,39 @@ router.post("/appendItem", async (req, res) => {
   }
 });
 
-router.post("/:id/image", async (req, res) => {
+router.post("/:id/image", upload.single("image"), async (req, res) => {
   try {
     const id = req.params.id;
+
+    const image = req.file;
+
+    if (!image) {
+      throw new Error("Image is missing in POST request");
+    }
+
+    const data = await readFile(FILE_PATH, "utf8");
+    const parsedData = JSON.parse(data);
+
+    const item = parsedData.find((item) => item.id == id);
+    const itemIndex = parsedData.findIndex((item) => item.id == id);
+
+    if (itemIndex != -1) {
+      try {
+        const absoluteImagePath = path.resolve(item.imagePath);
+
+        await rename(image.path, absoluteImagePath);
+        res.status(200);
+        console.log("Image sucessfully sent in POST request");
+      } catch (error) {
+        console.error("Error inserting image in database", error);
+      }
+    } else {
+      res.status(404);
+      console.log("Item not found for image POST request");
+    }
   } catch (error) {
     res.status(500);
-    console.error("Error sending image t", error);
+    console.error("Error sending image in POST request", error);
   }
 });
 
@@ -102,7 +131,7 @@ router.delete("/:id", async (req, res) => {
 
     if (itemIndex != -1) {
       try {
-        absoluteImagePath = path.resolve(item.imagePath);
+        const absoluteImagePath = path.resolve(item.imagePath);
         await unlink(absoluteImagePath);
         console.log("Image sucessfully deleted");
       } catch (error) {
