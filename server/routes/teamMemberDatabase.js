@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
     res.setHeader("Content-Type", "application/json");
 
     res.send(data);
-    res.status(200);
+    res.status(200).send();
     console.log("JSON sent in GET request");
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.log("Error reading file for GET request", error);
   }
 });
@@ -34,14 +34,14 @@ router.get("/:id/image", async (req, res) => {
     if (item) {
       absolutePath = path.resolve(item.imagePath);
       res.sendFile(absolutePath);
-      res.status(200);
+      res.status(200).send();
       console.log("Image sent in GET request");
     } else {
-      res.status(404);
+      res.status(404).send();
       console.log("Item not found when searching for image for GET request");
     }
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.error("Error getting image for GET request", error);
   }
 });
@@ -51,10 +51,10 @@ router.post("/", async (req, res) => {
     const updatedData = JSON.stringify(req.body);
 
     await writeFile(FILE_PATH, updatedData, "utf8");
-    res.status(200);
+    res.status(200).send();
     console.log("JSON updated in POST request");
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.error("Error sending POST request", error);
   }
 });
@@ -71,7 +71,7 @@ router.post("/appendItem", async (req, res) => {
         "Error parsing data for POST request for specific id",
         error
       );
-      res.status(500);
+      res.status(500).send();
       return;
     }
 
@@ -79,10 +79,10 @@ router.post("/appendItem", async (req, res) => {
     const updatedData = JSON.stringify(parsedData);
 
     await writeFile(FILE_PATH, updatedData, "utf8");
-    res.status(200);
+    res.status(200).send();
     console.log("Object appended in POST request");
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.error("Error sending POST request for specific id", error);
   }
 });
@@ -108,17 +108,17 @@ router.post("/:id/image", upload.single("image"), async (req, res) => {
         const absoluteImagePath = path.resolve(item.imagePath);
 
         await rename(image.path, absoluteImagePath);
-        res.status(200);
+        res.status(200).send();
         console.log("Image sucessfully sent in POST request");
       } catch (error) {
         console.error("Error inserting image in database", error);
       }
     } else {
-      res.status(404);
+      res.status(404).send();
       console.log("Item not found for image POST request");
     }
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.error("Error sending image in POST request", error);
   }
 });
@@ -145,14 +145,14 @@ router.delete("/:id", async (req, res) => {
       parsedData.splice(itemIndex, 1); // deletes item
       const updatedData = JSON.stringify(parsedData, null, 2);
       await writeFile(FILE_PATH, updatedData, "utf8");
-      res.status(200);
+      res.status(200).send();
       console.log("Item sucessfully deleted");
     } else {
-      res.status(404);
+      res.status(404).send();
       console.log("Item not found for DELETE request");
     }
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
     console.log("Error reading file for DELETE request", error);
   }
 });
