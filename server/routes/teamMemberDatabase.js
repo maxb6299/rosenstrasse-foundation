@@ -33,8 +33,7 @@ router.get("/:id/image", async (req, res) => {
 
     if (item) {
       absolutePath = path.resolve(item.imagePath);
-      res.sendFile(absolutePath);
-      res.status(200).send();
+      res.status(200).sendFile(absolutePath);
       console.log("Image sent in GET request");
     } else {
       res.status(404).send();
@@ -68,7 +67,7 @@ router.post("/appendItem", async (req, res) => {
       parsedData = JSON.parse(data);
     } catch (error) {
       console.error(
-        "Error parsing data for POST request for specific id",
+        "Error parsing data for POST request for appending an item",
         error
       );
       res.status(500).send();
@@ -83,7 +82,7 @@ router.post("/appendItem", async (req, res) => {
     console.log("Object appended in POST request");
   } catch (error) {
     res.status(500).send();
-    console.error("Error sending POST request for specific id", error);
+    console.error("Error sending POST request appending an item", error);
   }
 });
 
@@ -133,7 +132,7 @@ router.delete("/:id", async (req, res) => {
     const item = parsedData.find((item) => item.id == id);
     const itemIndex = parsedData.findIndex((item) => item.id == id);
 
-    if (itemIndex != -1) {
+    if (itemIndex != -1 && itemIndex < parsedData.length) {
       try {
         const absoluteImagePath = path.resolve(item.imagePath);
         await unlink(absoluteImagePath);
