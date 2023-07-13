@@ -5,7 +5,7 @@ const multer = require("multer");
 const upload = multer({ dest: "./database/team-members/images" });
 const router = express.Router();
 
-const FILE_PATH = "./database/team-members/team-members.json";
+const FILE_PATH = "./database/team-members/data.json";
 
 router.get("/", (req, res) => {
   databaseController.get_all_data(req, res, FILE_PATH);
