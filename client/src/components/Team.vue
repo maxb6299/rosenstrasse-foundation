@@ -1,7 +1,7 @@
 <template>
     <div class="cards">
         <div class="card" v-for="(value, key) in data" :key="key" >
-            <div><img class="team-card-image" :src="getImageUrl(value.id)" alt="Team Member Image"></div>
+            <div :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" alt="Team Member Image"></div>
 
             <div v-if="true && isAdmin">
                 <!-- TODO set if statement to be based on if there is an image sent -->
@@ -14,7 +14,7 @@
                 <div class="team-card-text-name">{{ value.name }}</div>  
                 <div class="team-card-text-position">{{ value.position }}</div>
                 
-                <!-- <a class="team-card-text-readmore">Read more</a> -->
+                <a class="team-card-text-readmore">Read more</a>
             </div>
             
             <div v-if="isAdmin">
@@ -53,6 +53,7 @@ import { v4 as uuidv4 } from 'uuid';
                     imagePath: '',
                     rank: -1
                 },
+                showImages: true,
                 isAdmin: true
             }
         },
@@ -64,8 +65,11 @@ import { v4 as uuidv4 } from 'uuid';
                 const response = await fetch(URL, { method: 'GET' });
                 this.data = await response.json();
             },
-                getImageUrl(id) {
-                return `http://localhost:3000/team-members/${id}/image`; 
+            getImageUrl(id) {
+                return `http://localhost:3000/team-members/${id}/image?${this.showImages}`; 
+            },
+            refreshImages() {
+                this.showImages += 1;
             },
             async saveNewItem() {
                 this.newMember.id = uuidv4();
@@ -80,6 +84,8 @@ import { v4 as uuidv4 } from 'uuid';
                               body: BODY, 
                               headers: { 'Content-Type': 'application/json' } 
                 });
+
+                await this.getData();
             },
             async deleteItem(id) {
                 const URL = `http://localhost:3000/team-members/${id}`;
@@ -88,15 +94,16 @@ import { v4 as uuidv4 } from 'uuid';
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' }
                 });
+
+                await this.getData();
             },
             async saveNewImage(id) {
-
                 let fileInput = document.createElement('input');
                 fileInput.type = 'file';
                 fileInput.name = 'image'
                 fileInput.accept = 'image/*';
 
-                fileInput.addEventListener('change', (event) => {
+                fileInput.addEventListener('change', async (event) => {
                     let selectedFile = event.target.files[0];
                     
                     var formdata = new FormData();
@@ -111,7 +118,8 @@ import { v4 as uuidv4 } from 'uuid';
                         redirect: 'follow'
                     };
                     
-                    fetch(URL, requestOptions);
+                    await fetch(URL, requestOptions);
+                    this.refreshImages();
                 });
                     
                 document.body.appendChild(fileInput);
