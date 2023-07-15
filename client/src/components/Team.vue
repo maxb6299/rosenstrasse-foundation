@@ -63,7 +63,12 @@ import { v4 as uuidv4 } from 'uuid';
                 const URL = 'http://localhost:3000/team-members/';
 
                 const response = await fetch(URL, { method: 'GET' });
-                this.data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(`Error getting data from server. Status: ${response.status}`)
+                } else {
+                    this.data = await response.json();
+                }
             },
             getImageUrl(id) {
                 return `http://localhost:3000/team-members/${id}/image?${this.showImages}`; 
@@ -104,22 +109,25 @@ import { v4 as uuidv4 } from 'uuid';
                 fileInput.accept = 'image/*';
 
                 fileInput.addEventListener('change', async (event) => {
-                    let selectedFile = event.target.files[0];
-                    
-                    var formdata = new FormData();
-                    formdata.append("image", fileInput.files[0]);
-                    
-                    const URL = `http://localhost:3000/team-members/${id}/image`;
-                    
-                    var requestOptions = {
-                        method: 'POST',
-                        body: formdata,
-                        enctype: 'multipart/form-data',
-                        redirect: 'follow'
-                    };
-                    
-                    await fetch(URL, requestOptions);
-                    this.refreshImages();
+                    if (event.target.files.length > 0) {
+
+                        let selectedFile = event.target.files[0];
+                        
+                        var formdata = new FormData();
+                        formdata.append("image", fileInput.files[0]);
+                        
+                        const URL = `http://localhost:3000/team-members/${id}/image`;
+                        
+                        var requestOptions = {
+                            method: 'POST',
+                            body: formdata,
+                            enctype: 'multipart/form-data',
+                            redirect: 'follow'
+                        };
+                        
+                        await fetch(URL, requestOptions);
+                        this.refreshImages();
+                    }
                 });
                     
                 document.body.appendChild(fileInput);
