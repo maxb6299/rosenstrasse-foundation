@@ -7,6 +7,8 @@ const router = express.Router();
 
 const FILE_PATH = "./database/team-members/data.json";
 
+databaseController.initialize_database(FILE_PATH);
+
 router.get("/", (req, res) => {
   databaseController.get_all_data(req, res, FILE_PATH);
 });
