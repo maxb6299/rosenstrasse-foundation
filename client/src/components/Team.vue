@@ -19,9 +19,19 @@
             
             <div v-if="isAdmin">
                 <button @click="deleteItem(value.id)">Delete</button>
+
+                <div v-if="isEditCards">
+                    <button @click="moveCardLeft(value.id)">&lt</button>
+                    <button @click="moveCardRight(value.id)">&gt</button>
+                </div>
             </div>
 
             <!-- <div>{{ value.description }}</div> -->
+        </div>
+        <div v-if="isAdmin">
+            <button @click="isEditCards = !isEditCards">Edit card order</button>
+            <button v-if="isEditCards" @click="saveData">Save card order</button>
+            <button v-if="isEditCards" @click="getData">Discard card order</button>
         </div>
     </div>
 
@@ -54,7 +64,8 @@ import { v4 as uuidv4 } from 'uuid';
                     rank: -1
                 },
                 showImages: true,
-                isAdmin: true
+                isAdmin: true,
+                isEditCards: false
             }
         },
 
@@ -76,11 +87,20 @@ import { v4 as uuidv4 } from 'uuid';
             refreshImages() {
                 this.showImages += 1;
             },
+            async saveData() {
+                const URL = 'http://localhost:3000/team-members/';
+                const BODY = JSON.stringify(this.data);
+
+                await fetch (URL, { method: 'POST',
+                            body: BODY,
+                            headers: {'Content-type': 'application/json'}
+                        });
+            },
             async saveNewItem() {
                 this.newMember.id = uuidv4();
                 this.newMember.imagePath = `./database/team-members/images/${this.newMember.id}.png`
 
-                this.newMember.rank = 0; // TODO FIX THIS
+                this.newMember.rank = this.data.length;
                 
                 const URL = 'http://localhost:3000/team-members/appendItem';
                 const BODY = JSON.stringify(this.newMember);
@@ -132,6 +152,25 @@ import { v4 as uuidv4 } from 'uuid';
                     
                 document.body.appendChild(fileInput);
                 fileInput.click();
+            },
+            moveCardLeft(id) { 
+                const item = this.data.find(item => item.id === id);
+                if (item.rank != 0) {
+                    this.data[item.rank - 1].rank++;
+                    item.rank--;
+                }
+
+                this.data = this.data.sort((a, b) => a.rank - b.rank);
+            },
+            moveCardRight(id) { 
+                const item = this.data.find(item => item.id === id);
+                const lowestRank = this.data.length;
+                if (item.rank != lowestRank - 1) {
+                    this.data[item.rank + 1].rank--;
+                    item.rank++;
+                }
+
+                this.data = this.data.sort((a, b) => a.rank - b.rank);
             }
         },
 
