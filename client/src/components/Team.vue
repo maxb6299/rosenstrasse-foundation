@@ -1,14 +1,8 @@
 <template>
     <div class="cards">
         <div class="card" v-for="(value, key) in data" :key="key" >
-            <div :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" alt="Team Member Image"></div>
-
-            <div v-if="true && isAdmin">
-                <!-- TODO set if statement to be based on if there is an image sent -->
-                <form @submit.prevent="saveNewImage(value.id)">
-                <input type="submit" value="Insert image here">
-                </form>
-            </div>
+            <div v-if="isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" @click=saveNewImage(value.id) alt="Team Member Image"></div>
+            <div v-if="!isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" alt="Team Member Image"></div>
 
             <div class="team-card-text">
                 <div class="team-card-text-name">{{ value.name }}</div>  
@@ -28,13 +22,13 @@
 
             <!-- <div>{{ value.description }}</div> -->
         </div>
-        <div v-if="isAdmin">
-            <button @click="isEditCards = !isEditCards">Edit card order</button>
-            <button v-if="isEditCards" @click="saveData">Save card order</button>
-            <button v-if="isEditCards" @click="getData">Discard card order</button>
-        </div>
     </div>
 
+     <div v-if="isAdmin">
+        <button @click="isEditCards = !isEditCards">Edit card order</button>
+        <button v-if="isEditCards" @click="saveData">Save card order</button>
+        <button v-if="isEditCards" @click="getData">Discard card order</button>
+    </div>
     <div v-if="isAdmin">
         <form @submit.prevent="saveNewItem">
             Name: <input required v-model="newMember.name">
@@ -42,7 +36,8 @@
             Description: <input required v-model="newMember.description">
             <input type="submit" value="Save">
         </form>
-    </div>
+    </div>       
+
     <div>
         
     </div>
