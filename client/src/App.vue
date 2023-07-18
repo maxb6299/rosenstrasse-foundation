@@ -1,5 +1,7 @@
 <template>
-  <Team></Team>
+  <div class="body">
+    <Team></Team>
+  </div>
 </template>
 
 <script>
@@ -14,4 +16,12 @@ export default {
 </script>
 
 <style>
+  body {
+    display: flex;
+    justify-content: center;
+  }
+  .body {
+    width: 860px;
+    background-color: #D9D9D9;
+  }
 </style>

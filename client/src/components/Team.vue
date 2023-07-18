@@ -1,45 +1,43 @@
 <template>
-    <div class="cards">
-        <div class="card" v-for="(value, key) in data" :key="key" >
-            <div v-if="isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" @click=saveNewImage(value.id) alt="Team Member Image"></div>
-            <div v-if="!isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" alt="Team Member Image"></div>
-
-            <div class="team-card-text">
-                <div class="team-card-text-name">{{ value.name }}</div>  
-                <div class="team-card-text-position">{{ value.position }}</div>
-                
-                <a class="team-card-text-readmore">Read more</a>
-            </div>
-            
-            <div v-if="isAdmin">
-                <button @click="deleteItem(value.id)">Delete</button>
-
-                <div v-if="isEditCards">
-                    <button @click="moveCardLeft(value.id)">&lt</button>
-                    <button @click="moveCardRight(value.id)">&gt</button>
-                </div>
-            </div>
-
-            <!-- <div>{{ value.description }}</div> -->
-        </div>
-    </div>
-
-     <div v-if="isAdmin">
-        <button @click="isEditCards = !isEditCards">Edit card order</button>
-        <button v-if="isEditCards" @click="saveData">Save card order</button>
-        <button v-if="isEditCards" @click="getData">Discard card order</button>
-    </div>
-    <div v-if="isAdmin">
-        <form @submit.prevent="saveNewItem">
-            Name: <input required v-model="newMember.name">
-            Position: <input required v-model="newMember.position">
-            Description: <input required v-model="newMember.description">
-            <input type="submit" value="Save">
-        </form>
-    </div>       
-
     <div>
+        <div class="cards">
+            <div class="card" v-for="(value, key) in data" :key="key" >
+                <div v-if="isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" @click=saveNewImage(value.id) alt="Team Member Image"></div>
+                <div v-if="!isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" alt="Team Member Image"></div>
+                
+                <div class="team-card-text">
+                    <div class="team-card-text-name">{{ value.name }}</div>  
+                    <div class="team-card-text-position">{{ value.position }}</div>
+                    
+                    <a class="team-card-text-readmore">Read more</a>
+                </div>
+                
+                <div v-if="isAdmin">
+                    <button @click="deleteItem(value.id)">Delete</button>
+                    
+                    <div v-if="isEditCards">
+                        <button @click="moveCardLeft(value.id)">&lt</button>
+                        <button @click="moveCardRight(value.id)">&gt</button>
+                    </div>
+                </div>
+                
+                <!-- <div>{{ value.description }}</div> -->
+            </div>
+        </div>
         
+        <div v-if="isAdmin">
+            <button @click="isEditCards = !isEditCards">Edit card order</button>
+            <button v-if="isEditCards" @click="saveData">Save card order</button>
+            <button v-if="isEditCards" @click="getData">Discard card order</button>
+        </div>
+        <div v-if="isAdmin">
+            <form @submit.prevent="saveNewItem">
+                Name: <input required v-model="newMember.name">
+                Position: <input required v-model="newMember.position">
+                Description: <input required v-model="newMember.description">
+                <input type="submit" value="Save">
+            </form>
+        </div>       
     </div>
 </template>
 
@@ -185,9 +183,6 @@ import { v4 as uuidv4 } from 'uuid';
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-body {
-    background-color: #D9D9D9;
-}
 .cards {
     display: flex;
     justify-content: center;
