@@ -12,29 +12,37 @@ exports.initialize_database = async (filePath) => {
   });
 };
 
-exports.get_all_data = async (req, res, filePath) => {
+exports.get_all_data = async (req, res, collection) => {
   try {
-    const data = await readFile(filePath, "utf8");
-    res.setHeader("Content-Type", "application/json");
+    const database = req.app.get("database");
+    const allData = await database.collection(collection).find().toArray();
 
-    res.status(200).send(data);
-    console.log("JSON sent in GET request");
+    res.status(200).json(allData);
+    console.log(`Successfully got all data from ${collection}`);
   } catch (error) {
-    res.status(500).send();
-    console.log("Error reading file for GET request", error);
+    res
+      .status(500)
+      .json({ error: `Error getting all data from collection ${collection}` });
+    console.log(`Error getting all data from ${collection}:`, error);
   }
 };
 
-exports.update_all_data = async (req, res, filePath) => {
+exports.update_all_data = async (req, res, collection) => {
   try {
-    const updatedData = JSON.stringify(req.body);
+    const updatedData = req.body;
 
-    await writeFile(filePath, updatedData, "utf8");
-    res.status(200).send();
-    console.log("JSON updated in POST request");
+    const database = req.app.get("database");
+    await database.collection(collection).updateMany({}, { $set: updatedData });
+
+    res
+      .status(200)
+      .json({ message: `Successfully updated all data from ${collection}` });
+    console.log(`Successfully updated all data from ${collection}`);
   } catch (error) {
-    res.status(500).send();
-    console.error("Error sending POST request", error);
+    res
+      .status(500)
+      .json({ error: `Error updating all data from collection ${collection}` });
+    console.log(`Error updating all data from ${collection}:`, error);
   }
 };
 
