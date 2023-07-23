@@ -5,32 +5,30 @@ const multer = require("multer");
 const upload = multer({ dest: "./database/team-members/images" });
 const router = express.Router();
 
-const FILE_PATH = "./database/team-members/data.json";
-
-databaseController.initialize_database(FILE_PATH);
+const COLLECTION = "teamMembers";
 
 router.get("/", (req, res) => {
-  databaseController.get_all_data(req, res, FILE_PATH);
+  databaseController.get_all_data(req, res, COLLECTION);
 });
 
 router.post("/", (req, res) => {
-  databaseController.update_all_data(req, res, FILE_PATH);
+  databaseController.update_all_data(req, res, COLLECTION);
 });
 
 router.get("/:id/image", (req, res) => {
-  databaseController.get_image(req, res, FILE_PATH);
+  databaseController.get_image(req, res, COLLECTION);
 });
 
 router.post("/appendItem", (req, res) => {
-  databaseController.append_item(req, res, FILE_PATH);
+  databaseController.append_item(req, res, COLLECTION);
 });
 
 router.post("/:id/image", upload.single("image"), (req, res) => {
-  databaseController.update_image(req, res, FILE_PATH);
+  databaseController.update_image(req, res, COLLECTION);
 });
 
 router.delete("/:id", (req, res) => {
-  databaseController.delete_item(req, res, FILE_PATH);
+  databaseController.delete_item(req, res, COLLECTION);
 });
 
 module.exports = router;
