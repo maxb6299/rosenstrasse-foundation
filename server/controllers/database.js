@@ -81,7 +81,6 @@ exports.update_image = async (req, res, collection) => {
     const imageData = fs.readFileSync(image.path);
 
     const imagePath = path.resolve("./temp/image.png");
-    console.log(imageData);
     fs.writeFileSync(imagePath, imageData);
 
     const database = req.app.get("database");
