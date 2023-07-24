@@ -1,25 +1,23 @@
-import { v4 as uuidv4 } from "uuid";
+import { v4 as generateNewId } from "uuid";
 
 export default {
-  async getData() {
-    const URL = "http://localhost:3000/team-members/";
+  async getData(database) {
+    const URL = `http://localhost:3000/${database}/`;
 
     const response = await fetch(URL, { method: "GET" });
 
-    if (!response.ok) {
-      throw new Error(
-        `Error getting data from server. Status: ${response.status}`
-      );
-    } else {
-      this.data = await response.json();
+    if (!response.ok) return null;
+    else {
+      const data = await response.json();
+      return data;
     }
   },
-  getImageUrl(id) {
-    return `http://localhost:3000/team-members/${id}/image?${this.showImages}`;
+  getImageUrl(database, id) {
+    return `http://localhost:3000/${database}/${id}/image`;
   },
-  async saveData() {
-    const URL = "http://localhost:3000/team-members/";
-    const BODY = JSON.stringify(this.data);
+  async saveData(database, data) {
+    const URL = `http://localhost:3000/${database}/`;
+    const BODY = JSON.stringify(data);
 
     await fetch(URL, {
       method: "POST",
@@ -27,34 +25,29 @@ export default {
       headers: { "Content-type": "application/json" },
     });
   },
-  async saveNewItem() {
-    this.newMember.id = uuidv4();
-    this.newMember.imagePath = `./database/team-members/images/${this.newMember.id}.png`;
 
-    this.newMember.rank = this.data.length;
+  async saveNewItem(database, newMember) {
+    newMember._id = generateNewId();
 
-    const URL = "http://localhost:3000/team-members/appendItem";
-    const BODY = JSON.stringify(this.newMember);
+    const URL = `http://localhost:3000/${database}/${newMember._id}`;
+    const BODY = JSON.stringify(newMember);
 
     await fetch(URL, {
       method: "POST",
       body: BODY,
       headers: { "Content-Type": "application/json" },
     });
-
-    await this.getData();
   },
-  async deleteItem(id) {
-    const URL = `http://localhost:3000/team-members/${id}`;
+  async deleteItem(database, id) {
+    const URL = `http://localhost:3000/${database}/${id}`;
 
     await fetch(URL, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
-
-    await this.getData();
   },
-  async saveNewImage(id) {
+
+  async saveNewImage(database, id) {
     let fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.name = "image";
@@ -67,17 +60,14 @@ export default {
         var formdata = new FormData();
         formdata.append("image", fileInput.files[0]);
 
-        const URL = `http://localhost:3000/team-members/${id}/image`;
+        const URL = `http://localhost:3000/${database}/${id}/image`;
 
-        var requestOptions = {
+        await fetch(URL, {
           method: "POST",
           body: formdata,
           enctype: "multipart/form-data",
           redirect: "follow",
-        };
-
-        await fetch(URL, requestOptions);
-        this.refreshImages();
+        });
       }
     });
 
