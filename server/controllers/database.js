@@ -1,6 +1,4 @@
 const path = require("path");
-const { readFile, writeFile, rename, access } = require("fs/promises");
-const { unlink } = require("fs").promises;
 const fs = require("fs");
 
 exports.get_all_data = async (req, res, collection) => {
