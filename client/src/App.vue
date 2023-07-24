@@ -1,27 +1,30 @@
 <template>
-  <div class="body">
-    <Team></Team>
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
 
-<script>
-import Team from './components/bodies/Team.vue'
-
-export default {
-  name: 'App',
-  components: {
-    Team
-  }
-}
-</script>
-
 <style>
-  body {
-    display: flex;
-    justify-content: center;
-  }
-  .body {
-    width: 860px;
-    background-color: #D9D9D9;
-  }
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>
