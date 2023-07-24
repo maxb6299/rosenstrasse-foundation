@@ -18,10 +18,14 @@ exports.get_all_data = async (req, res, collection) => {
 
 exports.update_all_data = async (req, res, collection) => {
   try {
-    const updatedData = req.body;
-
+    const dataArray = req.body;
     const database = req.app.get("database");
-    await database.collection(collection).updateMany({}, { $set: updatedData });
+
+    dataArray.forEach(async (item) => {
+      const filter = { _id: item._id };
+      const update = { $set: item };
+      await database.collection(collection).updateOne(filter, update);
+    });
 
     res
       .status(200)
