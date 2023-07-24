@@ -2,8 +2,12 @@
     <div>
         <div class="cards">
             <div class="card" v-for="(value, key) in data" :key="key" >
-                <div v-if="isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" @click=saveNewImage(value.id) alt="Team Member Image"></div>
-                <div v-if="!isAdmin" :key="showImages"><img class="team-card-image" :src="getImageUrl(value.id)" onerror="this.src='/assets/placeholder.png'" alt="Team Member Image"></div>
+                <div v-if="isAdmin">
+                    <img class="team-card-image" :src="getImageUrl(value._id)" onerror="this.src='/assets/placeholder.png'" @click=saveNewImage(value._id) alt="Team Member Image">
+                </div>
+                <div v-if="!isAdmin">
+                    <img class="team-card-image" :src="getImageUrl(value._id)" onerror="this.src='/assets/placeholder.png'" alt="Team Member Image">
+                </div>
                 
                 <div class="team-card-text">
                     <div class="team-card-text-name">{{ value.name }}</div>  
@@ -13,15 +17,13 @@
                 </div>
                 
                 <div v-if="isAdmin">
-                    <button @click="deleteItem(value.id)">Delete</button>
+                    <button @click="deleteItem(value._id)">Delete</button>
                     
                     <div v-if="isEditCards">
-                        <button @click="moveCardLeft(value.id)">&lt</button>
-                        <button @click="moveCardRight(value.id)">&gt</button>
+                        <button @click="moveCardLeft(value._id)">&lt</button>
+                        <button @click="moveCardRight(value._id)">&gt</button>
                     </div>
                 </div>
-                
-                <!-- <div>{{ value.description }}</div> -->
             </div>
         </div>
         
@@ -47,48 +49,72 @@ import databaseHelper from "../../_helpers/database.js"
     export default {
         data() {
             return {
-                data: [],
+                data: {},
                 newMember: {
-                    id: '',
+                    _id: '',
                     name: '',
                     position: '',
                     description: '',
-                    imagePath: '',
                     rank: -1
                 },
                 showImages: true,
                 isAdmin: true,
-                isEditCards: false
+                isEditCards: false,
+                databaseName: "team-members"
             }
         },
 
         methods: {
-            refreshImages() {
-                this.showImages += 1;
+            async getData() {
+                this.data = await databaseHelper.getData(this.databaseName);
+                this.sortArray();
+            },
+            saveData() {
+                databaseHelper.saveData(this.databaseName, this.data);
+            }, 
+            getImageUrl(id) {
+                return databaseHelper.getImageUrl(this.databaseName, id);
+            },
+            async saveNewItem() {
+                this.newMember.rank = this.data.length;
+                await databaseHelper.saveNewItem(this.databaseName, this.newMember);
+                await this.getData();
+            },
+            async saveNewImage(id) {
+                await databaseHelper.saveNewImage(this.databaseName, id);
+                await this.getData();
+            },
+            async deleteItem(id) {
+                console.log(id)
+                await databaseHelper.deleteItem(this.databaseName, id);
+                await this.getData();
             },
             moveCardLeft(id) { 
-                const item = this.data.find(item => item.id === id);
+                const item = this.data.find(item => item._id === id);
                 if (item.rank != 0) {
                     this.data[item.rank - 1].rank++;
                     item.rank--;
                 }
 
-                this.data = this.data.sort((a, b) => a.rank - b.rank);
+                this.sortArray();
             },
             moveCardRight(id) { 
-                const item = this.data.find(item => item.id === id);
+                const item = this.data.find(item => item._id === id);
                 const lowestRank = this.data.length;
                 if (item.rank != lowestRank - 1) {
                     this.data[item.rank + 1].rank--;
                     item.rank++;
                 }
 
+                this.sortArray();
+            },
+            sortArray() {
                 this.data = this.data.sort((a, b) => a.rank - b.rank);
             }
         },
 
         beforeMount() {
-            this.getData();
+            this.getData()
         }
     }
 </script>
