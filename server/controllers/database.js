@@ -3,15 +3,6 @@ const { readFile, writeFile, rename, access } = require("fs/promises");
 const { unlink } = require("fs").promises;
 const fs = require("fs");
 
-exports.initialize_database = async (filePath) => {
-  fs.access(filePath, fs.constants.F_OK, async (err) => {
-    if (err) {
-      await writeFile(filePath, "[]");
-      console.log(`Database initialized in '${filePath}'`);
-    }
-  });
-};
-
 exports.get_all_data = async (req, res, collection) => {
   try {
     const database = req.app.get("database");
@@ -46,69 +37,71 @@ exports.update_all_data = async (req, res, collection) => {
   }
 };
 
-exports.get_image = async (req, res, filePath) => {
+exports.get_image = async (req, res, collection) => {
   try {
     const id = req.params.id;
 
-    const data = await readFile(filePath, "utf8");
-    const parsedData = JSON.parse(data);
+    const database = req.app.get("database");
+    const userData = await database.collection(collection).findOne({ _id: id });
 
-    const item = parsedData.find((item) => item.id == id);
+    if (userData && userData.image) {
+      const imageData = userData.image;
+      const imagePath = path.resolve("./temp/image.png");
+      const imageBuffer = Buffer.from(imageData.buffer, "base64");
 
-    if (item) {
-      const absolutePath = path.resolve(item.imagePath);
+      fs.writeFileSync(imagePath, imageBuffer);
 
-      try {
-        await access(absolutePath);
-        res.status(200).sendFile(absolutePath);
-        console.log("Image sent in GET request");
-      } catch (error) {
-        res.status(404).send();
-        console.log("Image file not found for GET request");
-      }
+      res.status(200).sendFile(imagePath);
+      console.log(`Successfully got photo from ${collection}`);
+
+      clearTempDirectory();
     } else {
-      res.status(404).send();
-      console.log("Item not found when searching for image for GET request");
+      res.status(404).json({
+        error: `Error getting image from collection ${collection}`,
+      });
+
+      console.log("Image not found for GET request");
     }
   } catch (error) {
-    res.status(500).send();
-    console.error("Error getting image for GET request", error);
+    res
+      .status(500)
+      .json({ error: `Error getting photo from collection ${collection}` });
+    console.log(`Error getting photo from ${collection}:`, error);
   }
 };
 
-exports.update_image = async (req, res, filePath) => {
+exports.update_image = async (req, res, collection) => {
   try {
     const id = req.params.id;
     const image = req.file;
-
     if (!image) {
       throw new Error("Image is missing in POST request");
     }
 
-    const data = await readFile(filePath, "utf8");
-    const parsedData = JSON.parse(data);
+    const imageData = fs.readFileSync(image.path);
 
-    const item = parsedData.find((item) => item.id == id);
-    const itemIndex = parsedData.findIndex((item) => item.id == id);
+    const imagePath = path.resolve("./temp/image.png");
+    console.log(imageData);
+    fs.writeFileSync(imagePath, imageData);
 
-    if (itemIndex != -1) {
-      try {
-        const absoluteImagePath = path.resolve(item.imagePath);
+    const database = req.app.get("database");
+    await database
+      .collection(collection)
+      .updateOne({ _id: id }, { $set: { image: imageData } }, { upsert: true });
 
-        await rename(image.path, absoluteImagePath);
-        res.status(200).send();
-        console.log("Image sucessfully sent in POST request");
-      } catch (error) {
-        res.status(500).send();
-        console.error("Error inserting image in database", error);
-      }
-    } else {
-      res.status(404).send();
-      console.log("Item not found for image POST request");
-    }
+    fs.unlinkSync(imagePath);
+
+    res
+      .status(200)
+      .json({ message: `Successfully updated photo from ${collection}` });
+    console.log(`Successfully updated photo from ${collection}`);
+
+    clearTempDirectory();
   } catch (error) {
-    res.status(500).send();
-    console.error("Error updating image in POST request", error);
+    res
+      .status(500)
+      .json({ error: `Error updating photo from collection ${collection}` });
+    console.log(`Error updating photo from ${collection}:`, error);
   }
 };
 
@@ -175,3 +168,24 @@ exports.delete_item = async (req, res, filePath) => {
     console.log("Error reading file for DELETE request", error);
   }
 };
+
+function clearTempDirectory() {
+  const directoryPath = "./temp/";
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      console.log("Error reading directory:", err);
+      return;
+    }
+
+    files.forEach((file) => {
+      const filePath = `${directoryPath}/${file}`;
+
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log(`Error deleting file ${filePath}:`, err);
+          return;
+        }
+      });
+    });
+  });
+}
