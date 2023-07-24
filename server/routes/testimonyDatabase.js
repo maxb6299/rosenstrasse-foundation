@@ -2,12 +2,10 @@ const databaseController = require("../controllers/database.js");
 
 const express = require("express");
 const multer = require("multer");
-const upload = multer({ dest: "./database/testimonies/images" });
+const upload = multer({ dest: "./temp" });
 const router = express.Router();
 
 const FILE_PATH = "./database/testimonies/data.json";
-
-databaseController.initialize_database(FILE_PATH);
 
 router.get("/", (req, res) => {
   databaseController.get_all_data(req, res, FILE_PATH);

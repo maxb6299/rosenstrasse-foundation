@@ -2,7 +2,7 @@ const databaseController = require("../controllers/database.js");
 
 const express = require("express");
 const multer = require("multer");
-const upload = multer({ dest: "./database/team-members/images" });
+const upload = multer({ dest: "./temp" });
 const router = express.Router();
 
 const COLLECTION = "teamMembers";
