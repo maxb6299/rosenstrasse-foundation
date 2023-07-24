@@ -109,12 +109,12 @@ exports.update_image = async (req, res, collection) => {
 exports.append_item = async (req, res, collection) => {
   try {
     const id = req.params.id;
-    const data = req.body.data;
+    const data = req.body;
 
     const database = req.app.get("database");
     await database
       .collection(collection)
-      .updateOne({ _id: id }, { $set: { data: data } }, { upsert: true });
+      .updateOne({ _id: id }, { $set: { _id: id, ...data } }, { upsert: true });
 
     res
       .status(200)
