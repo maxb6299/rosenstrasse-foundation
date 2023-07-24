@@ -47,7 +47,7 @@ exports.get_image = async (req, res, collection) => {
 
     if (userData && userData.image) {
       const imageData = userData.image;
-      const imagePath = path.resolve("./temp/image.png");
+      const imagePath = path.resolve(`./temp/${id}.png`);
       const imageBuffer = Buffer.from(imageData.buffer, "base64");
 
       fs.writeFileSync(imagePath, imageBuffer);
@@ -82,7 +82,7 @@ exports.update_image = async (req, res, collection) => {
 
     const imageData = fs.readFileSync(image.path);
 
-    const imagePath = path.resolve("./temp/image.png");
+    const imagePath = path.resolve(`./temp/${id}.png`);
     fs.writeFileSync(imagePath, imageData);
 
     const database = req.app.get("database");
@@ -171,11 +171,11 @@ function clearTempDirectory() {
     }
 
     files.forEach((file) => {
-      const filePath = `${directoryPath}/${file}`;
+      const filePath = `${directoryPath}${file}`;
 
       fs.unlink(filePath, (err) => {
         if (err) {
-          console.log(`Error deleting file ${filePath}:`, err);
+          // console.log(`Error deleting file ${filePath}:`, err);
           return;
         }
       });
