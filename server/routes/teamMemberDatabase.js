@@ -19,7 +19,7 @@ router.get("/:id/image", (req, res) => {
   databaseController.get_image(req, res, COLLECTION);
 });
 
-router.post("/appendItem", (req, res) => {
+router.post("/:id", (req, res) => {
   databaseController.append_item(req, res, COLLECTION);
 });
 
