@@ -1,16 +1,77 @@
 <template>
     <div>
-        Testimonies
+        <div>
+            <div>
+                <div>Rosenstrasse Protest Testimonials</div>
+                <div class v-for="(value, key) in data" :key="key">
+                    <div v-if="value.categories.rosenstrasseProtest">
+                        <div>{{ value.name }}</div>
+                        <div>{{ value.description }}</div>
+                        <div>Written By {{ value.author }}</div>
+                        <div class="gallery" v-for="(value, key) in data.galleryIds" :key="key">
+                            <img class="testimonyImage" :src="getImageUrl(value._id)"
+                            onerror="this.src='/assets/placeholder.png'" alt="Team Member Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
+            <div>
+                <div>German Intermarriage Testimonials</div>
+                <div class v-for="(value, key) in data" :key="key">
+                    <div v-if="value.categories.germanIntermarriage">
+                        <div>{{ value.name }}</div>
+                        <div>{{ value.description }}</div>
+                        <div>Written By {{ value.author }}</div>
+                        <div class="gallery" v-for="(value, key) in data.galleryIds" :key="key">
+                            <img class="testimonyImage" :src="getImageUrl(value._id)"
+                            onerror="this.src='/assets/placeholder.png'" alt="Team Member Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div>
+                <div>Women's Resistance Testimonials</div>
+                <div class v-for="(value, key) in data" :key="key">
+                    <div v-if="value.categories.womensResistance">
+                        <div>{{ value.name }}</div>
+                        <div>{{ value.description }}</div>
+                        <div>Written By {{ value.author }}</div>
+                        <div class="gallery" v-for="(value, key) in data.galleryIds" :key="key">
+                            <img class="testimonyImage" :src="getImageUrl(value._id)"
+                            onerror="this.src='/assets/placeholder.png'" alt="Team Member Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div>
+                <div>German Civil Courage Testimonials</div>
+                <div class v-for="(value, key) in data" :key="key">
+                    <div v-if="value.categories.germanCivilCourage">
+                        <div>{{ value.name }}</div>
+                        <div>{{ value.description }}</div>
+                        <div>Written By {{ value.author }}</div>
+                        <div class="gallery" v-for="(value, key) in data.galleryIds" :key="key">
+                            <img class="testimonyImage" :src="getImageUrl(value._id)"
+                            onerror="this.src='/assets/placeholder.png'" alt="Team Member Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="isAdmin">
             <form @submit.prevent="saveNewItem">
                 Name: <input required v-model="newTestimony.name">
                 Description: <input required v-model="newTestimony.description">
                 Author: <input required v-model="newTestimony.author">
                 <div>Category:
-                    RosenstrasseProtest: <input v-model="newTestimony.categories.rosenstrasseProtest" type="checkbox">
-                    GermanIntermarriage: <input v-model="newTestimony.categories.germanIntermarriage" type="checkbox">
-                    WomensResistance: <input v-model="newTestimony.categories.womensResistance" type="checkbox">
-                    GermanCivilCourage: <input v-model="newTestimony.categories.germanCivilCourage" type="checkbox">
+                    Rosenstrasse Protest: <input v-model="newTestimony.categories.rosenstrasseProtest" type="checkbox">
+                    German Intermarriage: <input v-model="newTestimony.categories.germanIntermarriage" type="checkbox">
+                    Womens Resistance: <input v-model="newTestimony.categories.womensResistance" type="checkbox">
+                    German CivilCourage: <input v-model="newTestimony.categories.germanCivilCourage" type="checkbox">
                 </div>
                 <input type="submit" value="Save">
             </form>
