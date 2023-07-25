@@ -51,7 +51,7 @@ exports.get_image = async (req, res, collection) => {
 
     if (userData && userData.image) {
       const imageData = userData.image;
-      const imagePath = path.resolve(`./temp/${id}.png`);
+      const imagePath = path.resolve(`./tmp/${id}.png`);
       const imageBuffer = Buffer.from(imageData.buffer, "base64");
 
       fs.writeFileSync(imagePath, imageBuffer);
@@ -59,7 +59,7 @@ exports.get_image = async (req, res, collection) => {
       res.status(200).sendFile(imagePath);
       console.log(`Successfully got photo from ${imageCollection}`);
 
-      clearTempDirectory();
+      cleartmpDirectory();
     } else {
       res.status(404).json({
         error: `Error getting image from collection ${imageCollection}`,
@@ -86,7 +86,7 @@ exports.update_image = async (req, res, collection) => {
 
     const imageData = fs.readFileSync(image.path);
 
-    const imagePath = path.resolve(`./temp/${id}.png`);
+    const imagePath = path.resolve(`./tmp/${id}.png`);
     fs.writeFileSync(imagePath, imageData);
 
     const database = req.app.get("database");
@@ -101,7 +101,7 @@ exports.update_image = async (req, res, collection) => {
       .json({ message: `Successfully updated photo from ${imageCollection}` });
     console.log(`Successfully updated photo from ${imageCollection}`);
 
-    clearTempDirectory();
+    cleartmpDirectory();
   } catch (error) {
     res.status(500).json({
       error: `Error updating photo from collection ${imageCollection}`,
@@ -125,7 +125,7 @@ exports.append_item = async (req, res, collection) => {
       .json({ message: `Successfully appended item in ${collection}` });
     console.log(`Successfully appended item in ${collection}`);
 
-    clearTempDirectory();
+    cleartmpDirectory();
   } catch (error) {
     res
       .status(500)
@@ -188,8 +188,8 @@ async function deleteImage(id, collection, database) {
   }
 }
 
-function clearTempDirectory() {
-  const directoryPath = "./temp/";
+function cleartmpDirectory() {
+  const directoryPath = "./tmp/";
   fs.readdir(directoryPath, (err, files) => {
     if (err) {
       console.log("Error reading directory:", err);
