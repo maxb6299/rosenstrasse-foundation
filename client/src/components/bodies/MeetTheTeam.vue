@@ -85,7 +85,6 @@ export default {
         },
         async saveNewImage(id) {
             await databaseHelper.saveNewImage(this.databaseName, id);
-            await this.getData();
         },
         async deleteItem(id) {
             await databaseHelper.deleteItem(this.databaseName, id);
