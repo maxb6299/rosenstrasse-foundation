@@ -74,4 +74,24 @@ export default {
     document.body.appendChild(fileInput);
     fileInput.click();
   },
+
+  async saveImageToGallery(database, id) {
+    const imageId = generateNewId();
+
+    // appends imageId to gallery id list and saves
+    const testimonyData = this.getData(database).find(id);
+    const updatedTestimonyData = testimonyData.gallertIds.append(imageId);
+    await this.saveNewItem(database, updatedTestimonyData);
+
+    await this.saveNewImage(database, imageId);
+  },
+
+  async deleteImage(database, id) {
+    const URL = `http://localhost:3000/${database}/${id}/image`;
+
+    await fetch(URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  },
 };
