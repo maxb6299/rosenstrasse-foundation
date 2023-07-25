@@ -15,6 +15,10 @@ export default {
     SiteFooter,
     NavigationBar,
   },
+
+  created() {
+    document.title = "Rosenstrasse Foundation";
+  },
 };
 </script>
 
