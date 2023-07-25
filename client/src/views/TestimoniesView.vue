@@ -1,19 +1,17 @@
 <template>
-    <BodyTemplate title="Personal Testimonies">
-        <Testimonies></Testimonies>
-    </BodyTemplate>
+  <BodyTemplate title="Personal Testimonies">
+    <TestimoniesBody></TestimoniesBody>
+  </BodyTemplate>
 </template>
 
 <script>
-import BodyTemplate from '@/components/BodyTemplate.vue';
-import Testimonies from '@/components/bodies/Testimonies.vue';
+import BodyTemplate from "@/components/BodyTemplate.vue";
+import TestimoniesBody from "@/components/bodies/TestimoniesBody.vue";
 
 export default {
-    components: {
-        BodyTemplate,
-        Testimonies
-    }
-}
-
-
+  components: {
+    BodyTemplate,
+    TestimoniesBody,
+  },
+};
 </script>

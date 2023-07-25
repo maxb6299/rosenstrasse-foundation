@@ -1,17 +1,17 @@
 <template>
   <BodyTemplate title="Meet The Team">
-    <MeetTheTeam></MeetTheTeam>
-  </BodyTemplate>  
+    <MeetTheTeamBody></MeetTheTeamBody>
+  </BodyTemplate>
 </template>
 
 <script>
-import BodyTemplate from '@/components/BodyTemplate.vue';
-import MeetTheTeam from '@/components/bodies/MeetTheTeam.vue';
+import BodyTemplate from "@/components/BodyTemplate.vue";
+import MeetTheTeamBody from "@/components/bodies/MeetTheTeamBody.vue";
 
 export default {
   components: {
     BodyTemplate,
-    MeetTheTeam
-  }
-}
+    MeetTheTeamBody,
+  },
+};
 </script>

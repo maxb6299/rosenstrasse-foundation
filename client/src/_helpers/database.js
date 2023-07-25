@@ -55,8 +55,6 @@ export default {
 
     fileInput.addEventListener("change", async (event) => {
       if (event.target.files.length > 0) {
-        let selectedFile = event.target.files[0];
-
         var formdata = new FormData();
         formdata.append("image", fileInput.files[0]);
 

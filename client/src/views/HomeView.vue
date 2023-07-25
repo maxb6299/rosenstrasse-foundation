@@ -1,19 +1,19 @@
 <template>
   <div>
     <BodyTemplate title="Home">
-      <Home></Home>
+      <HomeBody></HomeBody>
     </BodyTemplate>
   </div>
 </template>
 
 <script>
-import BodyTemplate from '@/components/BodyTemplate.vue';
-import Home from '@/components/bodies/Home.vue';
+import BodyTemplate from "@/components/BodyTemplate.vue";
+import HomeBody from "@/components/bodies/HomeBody.vue";
 
 export default {
   components: {
     BodyTemplate,
-    Home
-  }
-}
+    HomeBody,
+  },
+};
 </script>
