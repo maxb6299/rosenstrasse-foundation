@@ -31,4 +31,8 @@ router.delete("/:id", (req, res) => {
   databaseController.delete_item(req, res, COLLECTION);
 });
 
+router.delete("/:id/image", upload.single("image"), (req, res) => {
+  databaseController.delete_image(req, res, COLLECTION);
+});
+
 module.exports = router;
