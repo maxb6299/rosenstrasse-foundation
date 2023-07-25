@@ -1,24 +1,40 @@
 <template>
-  <NavigationBar></NavigationBar>
-  <router-view />
+  <div class="main">
+    <NavigationBar></NavigationBar>
+    <router-view />
+    <SiteFooter></SiteFooter>
+  </div>
 </template>
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import SiteFooter from "@/components/SiteFooter.vue";
 
 export default {
   components: {
+    SiteFooter,
     NavigationBar,
   },
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "@/assets/_shared.scss";
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: black;
+  font-family: "Crimson Pro";
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 42px;
+  padding-top: 92px;
+  padding-bottom: 0px;
 }
 </style>

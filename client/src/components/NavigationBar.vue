@@ -8,20 +8,29 @@
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+@import "@/assets/_shared.scss";
+
 nav {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 30px;
-  padding: 30px;
+  height: 140px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $navy;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  font-size: 32px;
+  color: white;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: $lightBlue;
 }
 </style>
