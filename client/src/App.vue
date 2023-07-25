@@ -28,7 +28,7 @@ export default {
 #app {
   color: black;
   font-family: "Crimson Pro";
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 300;
 }
 
