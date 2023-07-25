@@ -1,10 +1,12 @@
 import { v4 as generateNewId } from "uuid";
 
+const URL = `https://rosenstrassefoundation-backend-dev.vercel.app`;
+
 export default {
   async getData(database) {
-    const URL = `http://localhost:3000/${database}/`;
+    const URI = `${URL}/${database}/`;
 
-    const response = await fetch(URL, { method: "GET" });
+    const response = await fetch(URI, { method: "GET" });
 
     if (!response.ok) return null;
     else {
@@ -13,13 +15,13 @@ export default {
     }
   },
   getImageUrl(database, id) {
-    return `http://localhost:3000/${database}/${id}/image`;
+    return `${URL}/${database}/${id}/image`;
   },
   async saveData(database, data) {
-    const URL = `http://localhost:3000/${database}/`;
+    const URI = `${URL}/${database}/`;
     const BODY = JSON.stringify(data);
 
-    await fetch(URL, {
+    await fetch(URI, {
       method: "POST",
       body: BODY,
       headers: { "Content-type": "application/json" },
@@ -29,19 +31,19 @@ export default {
   async saveNewItem(database, newMember) {
     newMember._id = generateNewId();
 
-    const URL = `http://localhost:3000/${database}/${newMember._id}`;
+    const URI = `${URL}/${database}/${newMember._id}`;
     const BODY = JSON.stringify(newMember);
 
-    await fetch(URL, {
+    await fetch(URI, {
       method: "POST",
       body: BODY,
       headers: { "Content-Type": "application/json" },
     });
   },
   async deleteItem(database, id) {
-    const URL = `http://localhost:3000/${database}/${id}`;
+    const URI = `${URL}/${database}/${id}`;
 
-    await fetch(URL, {
+    await fetch(URI, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -58,9 +60,9 @@ export default {
         var formdata = new FormData();
         formdata.append("image", fileInput.files[0]);
 
-        const URL = `http://localhost:3000/${database}/${id}/image`;
+        const URI = `${URL}/${database}/${id}/image`;
 
-        await fetch(URL, {
+        await fetch(URI, {
           method: "POST",
           body: formdata,
           enctype: "multipart/form-data",
@@ -85,9 +87,9 @@ export default {
   },
 
   async deleteImage(database, id) {
-    const URL = `http://localhost:3000/${database}/${id}/image`;
+    const URI = `${URL}/${database}/${id}/image`;
 
-    await fetch(URL, {
+    await fetch(URI, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
