@@ -1,6 +1,20 @@
 <template>
     <div>
         Testimonies
+        <div v-if="isAdmin">
+            <form @submit.prevent="saveNewItem">
+                Name: <input required v-model="newTestimony.name">
+                Description: <input required v-model="newTestimony.description">
+                Author: <input required v-model="newTestimony.author">
+                <div>Category:
+                    RosenstrasseProtest: <input v-model="newTestimony.categories.rosenstrasseProtest" type="checkbox">
+                    GermanIntermarriage: <input v-model="newTestimony.categories.germanIntermarriage" type="checkbox">
+                    WomensResistance: <input v-model="newTestimony.categories.womensResistance" type="checkbox">
+                    GermanCivilCourage: <input v-model="newTestimony.categories.germanCivilCourage" type="checkbox">
+                </div>
+                <input type="submit" value="Save">
+            </form>
+        </div>
     </div>
 </template>
 
