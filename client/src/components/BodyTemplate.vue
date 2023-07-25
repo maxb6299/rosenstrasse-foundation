@@ -1,8 +1,15 @@
 <template>
     <div>
+        <div>{{title}}</div>
         <div class="body"><slot></slot></div>
     </div>
 </template>
+
+<script>
+export default {
+    props: { title:''}
+}
+</script>
 
 <style>
 body {

@@ -1,5 +1,5 @@
 <template>
-  <BodyTemplate>
+  <BodyTemplate title="Meet The Team">
     <MeetTheTeam></MeetTheTeam>
   </BodyTemplate>  
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <BodyTemplate>
+    <BodyTemplate title="Personal Testimonies">
         <Testimonies></Testimonies>
     </BodyTemplate>
 </template>
