@@ -88,7 +88,6 @@ export default {
             await this.getData();
         },
         async deleteItem(id) {
-            console.log(id)
             await databaseHelper.deleteItem(this.databaseName, id);
             await this.getData();
         },
