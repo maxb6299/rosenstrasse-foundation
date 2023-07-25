@@ -140,15 +140,7 @@ exports.delete_item = async (req, res, collection) => {
     const database = req.app.get("database");
 
     const imageCollection = collection + "Images";
-    try {
-      await database.collection(imageCollection).deleteOne({ _id: id });
-      console.log(`Successfully deleted image from ${imageCollection}`);
-    } catch (error) {
-      console.log(
-        `Error deleting image for user ${id} from ${imageCollection}:`,
-        error
-      );
-    }
+    await deleteImage(id, imageCollection, database);
 
     try {
       await database.collection(collection).deleteOne({ _id: id });
@@ -165,6 +157,36 @@ exports.delete_item = async (req, res, collection) => {
     });
   }
 };
+
+exports.delete_image = async (req, res, collection) => {
+  try {
+    const id = req.params.id;
+    const database = req.app.get("database");
+
+    const imageCollection = collection + "Images";
+    const errorResponse = await deleteImage(id, imageCollection, database);
+    if (errorResponse) throw new Error(errorResponse);
+
+    res.status(200).json({ message: "success" });
+  } catch (error) {
+    res.status(500).json({
+      error: `Error deleting user from collection ${collection}`,
+    });
+  }
+};
+
+async function deleteImage(id, collection, database) {
+  try {
+    await database.collection(collection).deleteOne({ _id: id });
+    console.log(`Successfully deleted image from ${collection}`);
+  } catch (error) {
+    console.log(
+      `Error deleting image for user ${id} from ${collection}:`,
+      error
+    );
+    return error;
+  }
+}
 
 function clearTempDirectory() {
   const directoryPath = "./temp/";
