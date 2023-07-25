@@ -1,11 +1,17 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    <router-link to="/meet-the-team">Meet The Team</router-link>
-    <router-link to="/testimonies">Testimonies</router-link>
-  </nav>
+  <Navbar></Navbar>
   <router-view/>
 </template>
+
+<script>
+import Navbar from '@/components/Navbar.vue';
+
+export default {
+  components: {
+    Navbar,
+  }
+}
+</script>
 
 <style>
 #app {
@@ -16,19 +22,4 @@
   color: #2c3e50;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
