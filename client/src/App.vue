@@ -1,7 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/">Home</router-link>
     <router-link to="/meet-the-team">Meet The Team</router-link>
+    <router-link to="/testimonies">Testimonies</router-link>
   </nav>
   <router-view/>
 </template>
@@ -16,6 +17,9 @@
 }
 
 nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
   padding: 30px;
 }
 
