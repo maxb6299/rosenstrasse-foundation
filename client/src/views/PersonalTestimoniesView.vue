@@ -1,17 +1,17 @@
 <template>
   <BodyTemplate title="Personal Testimonies">
-    <TestimoniesBody></TestimoniesBody>
+    <PersonalTestimoniesBody></PersonalTestimoniesBody>
   </BodyTemplate>
 </template>
 
 <script>
 import BodyTemplate from "@/components/BodyTemplate.vue";
-import TestimoniesBody from "@/components/bodies/TestimoniesBody.vue";
+import PersonalTestimoniesBody from "@/components/bodies/PersonalTestimoniesBody.vue";
 
 export default {
   components: {
     BodyTemplate,
-    TestimoniesBody,
+    PersonalTestimoniesBody,
   },
 };
 </script>
