@@ -28,7 +28,7 @@ body {
   align-items: center;
   align-self: stretch;
   padding: 10px 0px;
-  gap: 10px;
+  gap: 32px;
 }
 
 .page-body {
