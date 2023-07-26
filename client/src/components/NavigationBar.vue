@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav>
-      <NavigationBarDropdown title="Currently Working Links" :items="links"></NavigationBarDropdown>
       <NavigationBarDropdown title="About" :items="about"></NavigationBarDropdown>
       <NavigationBarDropdown title="Learn" :items="learn"></NavigationBarDropdown>
+      <router-link to="/"><img src="@/../public/assets/logo.webp"></router-link>
       <NavigationBarDropdown title="Connect" :items="connect"></NavigationBarDropdown>
       <NavigationBarDropdown title="Resources" :items="resources"></NavigationBarDropdown>
     </nav>
