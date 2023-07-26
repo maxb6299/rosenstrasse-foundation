@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="Timeline">
             <TimelineBody></TimelineBody>
         </BodyTemplate>
     </div>
