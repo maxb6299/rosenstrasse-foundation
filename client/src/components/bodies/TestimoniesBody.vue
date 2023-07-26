@@ -1,27 +1,25 @@
 <template>
   <div>
     <div class="big-group">
-      <div v-for="(category, key) in categories" :key="key">
+      <div v-for="(category, categoryKey) in categories" :key="categoryKey">
         <div class="title">{{ category }}:</div>
         <div class="small-group">
-          <div v-for="(testimony, key) in data" :key="key">
+          <div v-for="(testimony, testimonyKey) in data" :key="testimonyKey">
             <div v-if="getCategory(category, testimony)">
               <div>-{{ testimony.name }}</div>
               <div v-if="true">
                 <div>{{ testimony.description }}</div>
                 <div class="author">Written By {{ testimony.author }}</div>
-                <div
-                  class="gallery"
-                  v-for="(imageId, key) in testimony.galleryIds"
-                  :key="key"
-                >
-                  <img
+                <div class="gallery">
+                    <img 
+                    v-for="(imageId, imageKey) in testimony.galleryIds"
+                    :key="imageKey"
                     class="testimonyImage"
                     :src="getImageUrl(imageId)"
                     onerror="this.src='/assets/placeholder.png'"
                     alt="Team Member Image"
+                    style="height: 300px"
                   />
-                  <button v-if="isAdmin" @click="deleteImage(imageId)">Delete this image</button>
                 </div>
                 <div v-if="isAdmin">
                   <button @click="saveNewImage(testimony._id)">Save New Image</button>
@@ -33,7 +31,7 @@
         </div>
       </div>
     </div>
-
+    
     <div v-if="isAdmin">
       <form @submit.prevent="saveNewItem">
         Name: <input required v-model="newTestimony.name" /> Description:
@@ -115,10 +113,7 @@ export default {
     async deleteItem(id) {
       await databaseHelper.deleteItem(this.databaseName, id);
       await this.getData();
-    },
-    async deleteImage(id) {
-      await databaseHelper.deleteImage(id);
-    },
+    }
   },
 
   beforeMount() {
