@@ -1,13 +1,13 @@
 <template>
-    <div class="nav-dropdown">
-        <div class="nav-dropdown-button" @click="isOpen=!isOpen">
+    <div class="nav-dropdown" @mouseenter="isOpen = true" @mouseleave="isOpen = false">
+        <div class="nav-dropdown-button">
             <a>{{ title }}</a>
             <svg viewBox="0 0 1030 638" width="10">
                 <path d="M1017 68L541 626q-11 12-26 12t-26-12L13 68Q-3 49 6 24.5T39 0h952q24 0 33 24.5t-7 43.5z" fill="#FFF"></path>
             </svg>
         </div>
 
-            <div class="nav-dropdown-submenu" v-if="isOpen" @click="isOpen=!isOpen">
+            <div class="nav-dropdown-submenu" v-if="isOpen" @click="isOpen=false">
             <div v-for="(menuItem, menuItemKey) in items" :key="menuItemKey" class="nav-dropdown-item">
                 <router-link class="nav-dropdown-submenu-item" :to="menuItem.link">{{ menuItem.title }}</router-link>
             </div>
