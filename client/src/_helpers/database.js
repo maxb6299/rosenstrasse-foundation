@@ -93,4 +93,12 @@ export default {
       console.log("Testimony not found");
     }
   },
+
+  async deleteImage(database, id) {
+    const URI = `${URL}/${database}/${id}/image`;
+    await fetch(URI, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  },
 };
