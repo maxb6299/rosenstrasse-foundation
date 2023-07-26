@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="Sources Cited">
             <SourcesCitedBody></SourcesCitedBody>
         </BodyTemplate>
     </div>

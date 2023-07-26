@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="The Rosesntrasse Protest">
             <TheRosenstrasseProtestBody></TheRosenstrasseProtestBody>
         </BodyTemplate>
     </div>

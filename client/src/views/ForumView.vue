@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="Forum">
             <ForumBody></ForumBody>
         </BodyTemplate>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="Gallery">
             <GalleryBody></GalleryBody>
         </BodyTemplate>
     </div>

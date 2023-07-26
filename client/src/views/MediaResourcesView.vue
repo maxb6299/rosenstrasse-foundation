@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Home">
+        <BodyTemplate title="Media Resources">
             <MediaResourcesBody></MediaResourcesBody>
         </BodyTemplate>
     </div>
