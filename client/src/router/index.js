@@ -61,29 +61,29 @@ const routes = [
   },
 
   {
-    path: "/timeline",
-    name: "timeline",
-    component: () => import("@/views/TimelineView.vue"),
+    path: "/documents",
+    name: "documents",
+    component: () => import("@/views/DocumentsView.vue"),
   },
   {
-    path: "/timeline",
-    name: "timeline",
-    component: () => import("@/views/TimelineView.vue"),
+    path: "/forum",
+    name: "forum",
+    component: () => import("@/views/ForumView.vue"),
   },
   {
-    path: "/timeline",
-    name: "timeline",
-    component: () => import("@/views/TimelineView.vue"),
+    path: "/media-resources",
+    name: "media-resources",
+    component: () => import("@/views/MediaResourcesView.vue"),
   },
   {
-    path: "/timeline",
-    name: "timeline",
-    component: () => import("@/views/TimelineView.vue"),
+    path: "/sources-cited",
+    name: "sources-cited",
+    component: () => import("@/views/SourcesCitedView.vue"),
   },
   {
-    path: "/timeline",
-    name: "timeline",
-    component: () => import("@/views/TimelineView.vue"),
+    path: "/scholarly-debate",
+    name: "scholarly-debate",
+    component: () => import("@/views/ScholarlyDebateView.vue"),
   },
 ];
 
