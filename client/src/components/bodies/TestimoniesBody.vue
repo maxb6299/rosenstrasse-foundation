@@ -1,98 +1,31 @@
 <template>
   <div>
-    <div>
-      <div>
-        <div>Rosenstrasse Protest Testimonials</div>
-        <div class v-for="(value, key) in data" :key="key">
-          <div v-if="value.categories.rosenstrasseProtest">
-            <div>{{ value.name }}</div>
-            <div>{{ value.description }}</div>
-            <div>Written By {{ value.author }}</div>
-            <div
-              class="gallery"
-              v-for="(value, key) in data.galleryIds"
-              :key="key"
-            >
-              <img
-                class="testimonyImage"
-                :src="getImageUrl(value._id)"
-                onerror="this.src='/assets/placeholder.png'"
-                alt="Team Member Image"
-              />
+    <div class="big-group">
+      <div v-for="(category, key) in categories" :key="key">
+        <div class="title">{{ category }}</div>
+        <div class="small-group">
+          <div v-for="(testimony, key) in data" :key="key">
+            <div v-if="getCategory(category, testimony)">
+              <div>{{ testimony.name }}</div>
+                <div>{{ testimony.description }}</div>
+                <div>Written By {{ testimony.author }}</div>
+                <div
+                  class="gallery"
+                  v-for="(imageId, key) in testimony.galleryIds"
+                  :key="key"
+                >
+                  <img
+                    class="testimonyImage"
+                    :src="getImageUrl(imageId)"
+                    onerror="this.src='/assets/placeholder.png'"
+                    alt="Team Member Image"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div>
-        <div>German Intermarriage Testimonials</div>
-        <div class v-for="(value, key) in data" :key="key">
-          <div v-if="value.categories.germanIntermarriage">
-            <div>{{ value.name }}</div>
-            <div>{{ value.description }}</div>
-            <div>Written By {{ value.author }}</div>
-            <div
-              class="gallery"
-              v-for="(value, key) in data.galleryIds"
-              :key="key"
-            >
-              <img
-                class="testimonyImage"
-                :src="getImageUrl(value._id)"
-                onerror="this.src='/assets/placeholder.png'"
-                alt="Team Member Image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div>Women's Resistance Testimonials</div>
-        <div class v-for="(value, key) in data" :key="key">
-          <div v-if="value.categories.womensResistance">
-            <div>{{ value.name }}</div>
-            <div>{{ value.description }}</div>
-            <div>Written By {{ value.author }}</div>
-            <div
-              class="gallery"
-              v-for="(value, key) in data.galleryIds"
-              :key="key"
-            >
-              <img
-                class="testimonyImage"
-                :src="getImageUrl(value._id)"
-                onerror="this.src='/assets/placeholder.png'"
-                alt="Team Member Image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div>German Civil Courage Testimonials</div>
-        <div class v-for="(value, key) in data" :key="key">
-          <div v-if="value.categories.germanCivilCourage">
-            <div>{{ value.name }}</div>
-            <div>{{ value.description }}</div>
-            <div>Written By {{ value.author }}</div>
-            <div
-              class="gallery"
-              v-for="(value, key) in data.galleryIds"
-              :key="key"
-            >
-              <img
-                class="testimonyImage"
-                :src="getImageUrl(value._id)"
-                onerror="this.src='/assets/placeholder.png'"
-                alt="Team Member Image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div v-if="isAdmin">
       <form @submit.prevent="saveNewItem">
@@ -115,7 +48,7 @@
             v-model="newTestimony.categories.womensResistance"
             type="checkbox"
           />
-          German CivilCourage:
+          German Civil Courage:
           <input
             v-model="newTestimony.categories.germanCivilCourage"
             type="checkbox"
@@ -147,12 +80,18 @@ export default {
         },
         galleryIds: [],
       },
+      categories: ['Rosenstrasse Protest', 'German Intermarriage', 'Womens Resistance', 'German Civil Courage'],
       isAdmin: true,
       databaseName: "testimonies",
     };
   },
-
   methods: {
+    getCategory(category, testimony) {
+      if (category == 'Rosenstrasse Protest') return testimony.categories.rosenstrasseProtest;
+      else if (category == 'German Intermarriage') return testimony.categories.germanIntermarriage;
+      else if (category == 'Womens Resistance') return testimony.categories.womensResistance;
+      else if (category == 'German Civil Courage') return testimony.categories.germanCivilCourage;
+    },
     async getData() {
       this.data = await databaseHelper.getData(this.databaseName);
     },
