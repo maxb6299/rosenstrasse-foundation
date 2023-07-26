@@ -137,7 +137,7 @@ export default {
   align-self: stretch;
   flex-wrap: wrap;
   padding: 32px 18px;
-  gap: 32px 64px;
+  gap: 32px;
 }
 
 .card {

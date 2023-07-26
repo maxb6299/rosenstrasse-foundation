@@ -33,6 +33,7 @@ body {
 
 .page-body {
   width: 860px;
+  padding: 32px;
   background-color: #d9d9d9;
 }
 
