@@ -2,13 +2,14 @@
   <div>
     <div class="big-group">
       <div v-for="(category, key) in categories" :key="key">
-        <div class="title">{{ category }}</div>
+        <div class="title">{{ category }}:</div>
         <div class="small-group">
           <div v-for="(testimony, key) in data" :key="key">
             <div v-if="getCategory(category, testimony)">
-              <div>{{ testimony.name }}</div>
+              <div>-{{ testimony.name }}</div>
+              <div v-if="true">
                 <div>{{ testimony.description }}</div>
-                <div>Written By {{ testimony.author }}</div>
+                <div class="author">Written By {{ testimony.author }}</div>
                 <div
                   class="gallery"
                   v-for="(imageId, key) in testimony.galleryIds"
@@ -20,12 +21,18 @@
                     onerror="this.src='/assets/placeholder.png'"
                     alt="Team Member Image"
                   />
+                  <button v-if="isAdmin" @click="deleteImage(imageId)">Delete this image</button>
+                </div>
+                <div v-if="isAdmin">
+                  <button @click="saveNewImage(testimony._id)">Save New Image</button>
+                  <button @click="deleteItem(testimony._id)">Delete</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
     <div v-if="isAdmin">
       <form @submit.prevent="saveNewItem">
@@ -119,3 +126,10 @@ export default {
   },
 };
 </script>
+
+<style style="scss">
+.author {
+  font-weight: 400;
+  font-style: italic;
+}
+</style>
