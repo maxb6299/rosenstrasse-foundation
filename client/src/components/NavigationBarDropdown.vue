@@ -7,9 +7,9 @@
             </svg>
         </div>
 
-        <div class="nav-dropdown-submenu" v-if="isOpen">
+            <div class="nav-dropdown-submenu" v-if="isOpen" @click="isOpen=!isOpen">
             <div v-for="(menuItem, menuItemKey) in items" :key="menuItemKey" class="nav-dropdown-item">
-                <router-link :to="menuItem.link">{{ menuItem.title }}</router-link>
+                <router-link class="nav-dropdown-submenu-item" :to="menuItem.link">{{ menuItem.title }}</router-link>
             </div>
         </div>
     </div>
@@ -51,5 +51,11 @@ export default {
 .nav-dropdown-submenu {
     position: absolute;
     background-color: $navy;
+}
+
+.nav-dropdown-submenu-item {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 </style>
