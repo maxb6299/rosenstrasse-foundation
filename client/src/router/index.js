@@ -50,9 +50,9 @@ const routes = [
     component: () => import("@/views/GalleryView.vue"),
   },
   {
-    path: "/monthly-news",
-    name: "monthly-news",
-    component: () => import("@/views/MonthlyNewsView.vue"),
+    path: "/monthly-newsletters",
+    name: "monthly-newsletters",
+    component: () => import("@/views/MonthlyNewslettersView.vue"),
   },
   {
     path: "/news-events",
