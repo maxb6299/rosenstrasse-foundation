@@ -11,3 +11,20 @@ $grey: #D9D9D9;
         U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
         U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 };
+
+.title {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.big-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.small-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
