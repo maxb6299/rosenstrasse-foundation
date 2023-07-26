@@ -79,19 +79,18 @@ export default {
     const imageId = generateNewId();
 
     // appends imageId to gallery id list and saves
-    const testimonyData = this.getData(database).find(id);
-    const updatedTestimonyData = testimonyData.gallertIds.append(imageId);
-    await this.saveNewItem(database, updatedTestimonyData);
+    const testimonyData = await this.getData(database);
+    const foundTestimony = testimonyData.find((item) => item._id == id);
 
-    await this.saveNewImage(database, imageId);
-  },
+    if (foundTestimony) {
+      foundTestimony.galleryIds.push(imageId);
+      const updatedTestimonyData = foundTestimony;
 
-  async deleteImage(database, id) {
-    const URI = `${URL}/${database}/${id}/image`;
-
-    await fetch(URI, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+      await this.deleteItem(database, id);
+      await this.saveNewItem(database, updatedTestimonyData);
+      await this.saveNewImage(database, imageId);
+    } else {
+      console.log("Testimony not found");
+    }
   },
 };
