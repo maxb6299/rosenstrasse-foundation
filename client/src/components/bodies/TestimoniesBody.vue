@@ -111,6 +111,11 @@ export default {
       await databaseHelper.saveImageToGallery(this.databaseName, id);
     },
     async deleteItem(id) {
+      const foundTestimony = this.data.find((item) => item._id == id);
+      for (const imageId of foundTestimony.galleryIds) {
+        databaseHelper.deleteImage(imageId, this.databaseName);
+      }
+      
       await databaseHelper.deleteItem(this.databaseName, id);
       await this.getData();
     }
