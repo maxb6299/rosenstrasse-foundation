@@ -2,7 +2,7 @@
     <div class="big-group">
         <div class="big-group" style="flex-direction: row;">
             <div>
-                <img src="@/../public/assets/about.png" style="width: 450px;height: 303px;">
+                <img src="@/../public/assets/about.png" alt="image" style="width: 450px;height: 303px;">
                 <div style="font-size: 16px;font-style: italic;">Frieda Thimm Rosenau with Heidi’s father, Werner, born June 28, 1929</div>
             </div>
             <div class="big-group">

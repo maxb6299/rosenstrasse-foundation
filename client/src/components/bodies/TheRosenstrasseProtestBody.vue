@@ -2,7 +2,7 @@
     <div class="big-group">
         <div class="big-group" style="flex-direction: row; align-items: center;">
             <div>
-                <img src="@/../public/assets/rosenstrasse-protest.webp" style="width:250px">
+                <img src="@/../public/assets/rosenstrasse-protest.webp" alt="image" style="width:250px">
                 <div style="font-size: 16px;font-style: italic;">A photo of the Jewish Federation on Rosenstrasse where the Jewish husbands were held. The protests took place in the street around this building.</div>
             </div>
             <div class="big-group">
