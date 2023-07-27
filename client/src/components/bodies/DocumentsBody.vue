@@ -1,6 +1,6 @@
 <template>
     <div class="big-group">
-        <a class="blue-button" v-for="(item, itemKey) in documents" :href="item.link">
+        <a class="blue-button" v-for="(item, itemKey) in documents" :href="item.link" target="_blank">
             {{ item.title }}
         </a>
     </div>
