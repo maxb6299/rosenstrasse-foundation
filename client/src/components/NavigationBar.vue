@@ -1,11 +1,13 @@
 <template>
   <div>
     <nav>
-      <NavigationBarDropdown title="About" :items="about"></NavigationBarDropdown>
-      <NavigationBarDropdown title="Learn" :items="learn"></NavigationBarDropdown>
-      <router-link to="/"><img src="@/../public/assets/logo.webp"></router-link>
-      <NavigationBarDropdown title="Connect" :items="connect"></NavigationBarDropdown>
-      <NavigationBarDropdown title="Resources" :items="resources"></NavigationBarDropdown>
+      <div class="navbar">
+        <NavigationBarDropdown title="About" :items="about"></NavigationBarDropdown>
+        <NavigationBarDropdown title="Learn" :items="learn"></NavigationBarDropdown>
+        <router-link to="/"><img src="@/../public/assets/logo.webp"></router-link>
+        <NavigationBarDropdown title="Connect" :items="connect"></NavigationBarDropdown>
+        <NavigationBarDropdown title="Resources" :items="resources"></NavigationBarDropdown>
+      </div>
     </nav>
   </div>
 </template>
@@ -111,12 +113,26 @@ export default {
 @import "@/assets/_shared.scss";
 
 nav {
+  height: 140px;
+  width: 100vw;
+  background-color: $navy;
+  display: flex;
+  align-items: center;
+}
+.navbar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-46.5%);
+  width: 100%;
+  
+  max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  height: 140px;
-  width: 100vw;
-  background-color: $navy;
+}
+.navbar img {
+  display: block;
+  margin: 0 auto;
 }
 </style>
