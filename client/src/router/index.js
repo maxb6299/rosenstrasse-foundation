@@ -85,6 +85,11 @@ const routes = [
     name: "scholarly-debate",
     component: () => import("@/views/ScholarlyDebateView.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/LoginView.vue"),
+  },
 ];
 
 const router = createRouter({
