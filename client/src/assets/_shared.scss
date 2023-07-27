@@ -43,3 +43,16 @@ h1 {
     font-weight: 600;
     font-size: 26px;
 }
+
+.blue-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    padding: 12px;
+    background: #9dbfd2;
+    
+    text-align: center;
+    font-size: 24px;
+    text-decoration-line: none;
+}
