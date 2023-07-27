@@ -30,6 +30,9 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/_shared.scss";
 
+* {
+  font-size: 24px;
+}
 .nav-dropdown a {
   color: white;
   position: relative;
