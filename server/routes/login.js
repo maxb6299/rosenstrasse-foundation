@@ -4,7 +4,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const credential = req.query.credential;
+  const authHeader = req.headers.authorization;
+  const credential = authHeader.split(" ")[1];
 
   let userData;
 
@@ -19,7 +20,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/authenticate", async (req, res) => {
-  const credential = req.query.credential;
+  const authHeader = req.headers.authorization;
+  const credential = authHeader.split(" ")[1];
 
   let userData;
 

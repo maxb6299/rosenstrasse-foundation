@@ -1,3 +1,5 @@
+const authenticate = require("../controllers/authenticate.js");
+
 const path = require("path");
 const fs = require("fs");
 
@@ -18,6 +20,10 @@ exports.get_all_data = async (req, res, collection) => {
 
 exports.update_all_data = async (req, res, collection) => {
   try {
+    const authHeader = req.headers.authorization;
+    const credential = authHeader.split(" ")[1];
+    await authenticateCredential(credential);
+
     const dataArray = req.body;
     const database = req.app.get("database");
 
@@ -45,12 +51,12 @@ exports.get_image = async (req, res, collection) => {
     const id = req.params.id;
 
     const database = req.app.get("database");
-    const userData = await database
+    const image = await database
       .collection(imageCollection)
       .findOne({ _id: id });
 
-    if (userData && userData.image) {
-      const imageData = userData.image;
+    if (image && image.image) {
+      const imageData = image.image;
       const imagePath = path.resolve(`/tmp/${id}.png`);
       const imageBuffer = Buffer.from(imageData.buffer, "base64");
 
@@ -77,6 +83,10 @@ exports.get_image = async (req, res, collection) => {
 
 exports.update_image = async (req, res, collection) => {
   try {
+    const authHeader = req.headers.authorization;
+    const credential = authHeader.split(" ")[1];
+    await authenticateCredential(credential);
+
     const imageCollection = collection + "Images";
     const id = req.params.id;
     const image = req.file;
@@ -112,6 +122,10 @@ exports.update_image = async (req, res, collection) => {
 
 exports.append_item = async (req, res, collection) => {
   try {
+    const authHeader = req.headers.authorization;
+    const credential = authHeader.split(" ")[1];
+    await authenticateCredential(credential);
+
     const id = req.params.id;
     const data = req.body;
 
@@ -136,6 +150,10 @@ exports.append_item = async (req, res, collection) => {
 
 exports.delete_item = async (req, res, collection) => {
   try {
+    const authHeader = req.headers.authorization;
+    const credential = authHeader.split(" ")[1];
+    await authenticateCredential(credential);
+
     const id = req.params.id;
     const database = req.app.get("database");
 
@@ -144,22 +162,26 @@ exports.delete_item = async (req, res, collection) => {
 
     try {
       await database.collection(collection).deleteOne({ _id: id });
-      console.log(`Successfully deleted user from ${collection}`);
+      console.log(`Successfully deleted item from ${collection}`);
     } catch (error) {
-      console.log(`Error deleting user ${id} from ${collection}:`, error);
+      console.log(`Error deleting item ${id} from ${collection}:`, error);
       throw error;
     }
 
     res.status(200).json({ message: "success" });
   } catch (error) {
     res.status(500).json({
-      error: `Error deleting user from collection ${collection}`,
+      error: `Error deleting item from collection ${collection}`,
     });
   }
 };
 
 exports.delete_image = async (req, res, collection) => {
   try {
+    const authHeader = req.headers.authorization;
+    const credential = authHeader.split(" ")[1];
+    await authenticateCredential(credential);
+
     const id = req.params.id;
     const database = req.app.get("database");
 
@@ -170,7 +192,7 @@ exports.delete_image = async (req, res, collection) => {
     res.status(200).json({ message: "success" });
   } catch (error) {
     res.status(500).json({
-      error: `Error deleting user from collection ${collection}`,
+      error: `Error deleting image from collection ${collection}`,
     });
   }
 };
@@ -181,7 +203,7 @@ async function deleteImage(id, collection, database) {
     console.log(`Successfully deleted image from ${collection}`);
   } catch (error) {
     console.log(
-      `Error deleting image for user ${id} from ${collection}:`,
+      `Error deleting image for item ${id} from ${collection}:`,
       error
     );
     return error;
@@ -207,4 +229,12 @@ function clearTempDirectory() {
       });
     });
   });
+}
+
+async function authenticateCredential(credential) {
+  try {
+    await authenticate.verify_credentials(credential);
+  } catch (error) {
+    throw new Error("Not authenticated");
+  }
 }
