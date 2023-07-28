@@ -21,7 +21,7 @@
                     style="height: 300px"
                   />
                 </div>
-                <div v-if="isAdmin">
+                <div v-if="authenticateStore.getAuthentication">
                   <button @click="saveNewImage(testimony._id)">Save New Image</button>
                   <button @click="deleteItem(testimony._id)">Delete</button>
                 </div>
@@ -32,7 +32,7 @@
       </div>
     </div>
     
-    <div v-if="isAdmin">
+    <div v-if="authenticateStore.getAuthentication">
       <form @submit.prevent="saveNewItem">
         Name: <input required v-model="newTestimony.name" /> Description:
         <input required v-model="newTestimony.description" /> Author:
@@ -67,8 +67,14 @@
 
 <script>
 import databaseHelper from "@/_helpers/database.js";
+import { useAuthenticateStore } from "@/store/AuthenticateStore.js";
 
 export default {
+  setup() {
+    const authenticateStore = useAuthenticateStore();
+    return { authenticateStore }
+  },
+
   data() {
     return {
       data: {},
@@ -86,7 +92,6 @@ export default {
         galleryIds: [],
       },
       categories: ['Rosenstrasse Protest', 'German Intermarriage', 'Womens Resistance', 'German Civil Courage'],
-      isAdmin: true,
       databaseName: "testimonies",
     };
   },

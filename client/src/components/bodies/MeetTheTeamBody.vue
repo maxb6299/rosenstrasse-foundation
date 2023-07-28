@@ -2,7 +2,7 @@
   <div>
     <div class="cards">
       <div class="card" v-for="(value, key) in data" :key="key">
-        <div v-if="isAdmin">
+        <div v-if="authenticateStore.getAuthentication">
           <img
             class="team-card-image"
             :src="getImageUrl(value._id)"
@@ -11,7 +11,7 @@
             alt="Team Member Image"
           />
         </div>
-        <div v-if="!isAdmin">
+        <div v-if="!authenticateStore.getAuthentication">
           <img
             class="team-card-image"
             :src="getImageUrl(value._id)"
@@ -27,7 +27,7 @@
           <a class="team-card-text-readmore">Read more</a>
         </div>
 
-        <div v-if="isAdmin">
+        <div v-if="authenticateStore.getAuthentication">
           <button @click="deleteItem(value._id)">Delete</button>
 
           <div v-if="isEditCards">
@@ -38,12 +38,12 @@
       </div>
     </div>
 
-    <div v-if="isAdmin">
+    <div v-if="authenticateStore.getAuthentication">
       <button @click="isEditCards = !isEditCards">Edit card order</button>
       <button v-if="isEditCards" @click="saveData">Save card order</button>
       <button v-if="isEditCards" @click="getData">Discard card order</button>
     </div>
-    <div v-if="isAdmin">
+    <div v-if="authenticateStore.getAuthentication">
       <form @submit.prevent="saveNewItem">
         Name: <input required v-model="newMember.name" /> Position:
         <input required v-model="newMember.position" /> Description:
@@ -56,8 +56,14 @@
 
 <script>
 import databaseHelper from "@/_helpers/database.js";
+import { useAuthenticateStore } from "@/store/AuthenticateStore.js";
 
 export default {
+  setup() {
+    const authenticateStore = useAuthenticateStore();
+    return { authenticateStore }
+  },
+
   data() {
     return {
       data: {},
@@ -69,7 +75,6 @@ export default {
         rank: -1,
       },
       showImages: true,
-      isAdmin: true,
       isEditCards: false,
       databaseName: "team-members",
     };
