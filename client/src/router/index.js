@@ -24,6 +24,12 @@ const routes = [
     component: () => import("@/views/PersonalTestimoniesView.vue"),
   },
   {
+    path: "/personal-testimonies/:id",
+    name: "individual-testimonies",
+    component: () => import("@/views/IndividualTestimoniesView.vue"),
+    props: true,
+  },
+  {
     path: "/the-rosenstrasse-protest",
     name: "the-rosenstrasse-protest",
     component: () => import("@/views/TheRosenstrasseProtestView.vue"),
