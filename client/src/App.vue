@@ -9,6 +9,8 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import SiteFooter from "@/components/SiteFooter.vue";
+import { useAuthenticateStore } from "@/store/AuthenticateStore.js";
+import cookieHelper from '@/_helpers/cookie.js'
 
 export default {
   components: {
@@ -16,8 +18,22 @@ export default {
     NavigationBar,
   },
 
-  created() {
+  setup() {
     document.title = "Rosenstrasse Foundation";
+
+    const authenticateStore = useAuthenticateStore();
+    authenticateStore.checkAuthentication(); //
+    return { authenticateStore }
+  },
+
+
+  async created() {
+    await this.authenticateStore.checkAuthentication();
+    if (!this.authenticateStore.getAuthentication) {
+      // signs out
+      cookieHelper.deleteCookie('id_token');
+      this.authenticateStore.checkAuthentication();
+    };
   },
 };
 </script>
