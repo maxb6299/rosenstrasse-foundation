@@ -46,8 +46,8 @@ exports.update_all_data = async (req, res, collection) => {
 };
 
 exports.get_image = async (req, res, collection) => {
+  const imageCollection = collection + "Images";
   try {
-    const imageCollection = collection + "Images";
     const id = req.params.id;
 
     const database = req.app.get("database");
@@ -82,12 +82,12 @@ exports.get_image = async (req, res, collection) => {
 };
 
 exports.update_image = async (req, res, collection) => {
+  const imageCollection = collection + "Images";
   try {
     const authHeader = req.headers.authorization;
     const credential = authHeader.split(" ")[1];
     await authenticateCredential(credential);
 
-    const imageCollection = collection + "Images";
     const id = req.params.id;
     const image = req.file;
     if (!image) {
@@ -157,8 +157,7 @@ exports.delete_item = async (req, res, collection) => {
     const id = req.params.id;
     const database = req.app.get("database");
 
-    const imageCollection = collection + "Images";
-    await deleteImage(id, imageCollection, database);
+    await deleteImage(id, collection, database);
 
     try {
       await database.collection(collection).deleteOne({ _id: id });
@@ -177,6 +176,7 @@ exports.delete_item = async (req, res, collection) => {
 };
 
 exports.delete_image = async (req, res, collection) => {
+  const imageCollection = collection + "Images";
   try {
     const authHeader = req.headers.authorization;
     const credential = authHeader.split(" ")[1];
@@ -185,14 +185,13 @@ exports.delete_image = async (req, res, collection) => {
     const id = req.params.id;
     const database = req.app.get("database");
 
-    const imageCollection = collection + "Images";
     const errorResponse = await deleteImage(id, imageCollection, database);
     if (errorResponse) throw new Error(errorResponse);
 
     res.status(200).json({ message: "success" });
   } catch (error) {
     res.status(500).json({
-      error: `Error deleting image from collection ${collection}`,
+      error: `Error deleting image from collection ${imageCollection}`,
     });
   }
 };
