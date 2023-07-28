@@ -12,25 +12,9 @@ router.get("/", async (req, res) => {
   try {
     userData = await authenticate.verify_credentials(credential);
     console.log(`User ${userData.sub} sucessfully verified`);
-    res.status(200).send("Success");
-  } catch (error) {
-    console.error("Error authenticating login", error.message);
-    res.status(500);
-  }
-});
-
-router.get("/authenticate", async (req, res) => {
-  const authHeader = req.headers.authorization;
-  const credential = authHeader.split(" ")[1];
-
-  let userData;
-
-  try {
-    userData = await authenticate.verify_credentials(credential);
-    console.log(`User ${userData.sub} sucessfully verified`);
     res.status(200).send("true");
   } catch (error) {
-    console.error("Error authenticating login", error.message);
+    console.error("Error authenticating", error.message);
     res.status(500).send("false");
   }
 });

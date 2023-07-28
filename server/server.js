@@ -14,8 +14,8 @@ app.use("/testimonies", testimonyDatabase);
 const teamMemberDatabase = require("./routes/teamMemberDatabase");
 app.use("/team-members", teamMemberDatabase);
 
-const loginRoute = require("./routes/login");
-app.use("/login", loginRoute);
+const authenticateRoute = require("./routes/authenticate");
+app.use("/authenticate", authenticateRoute);
 
 app.use((req, res) => {
   res.status(400).send("Bad Request");
