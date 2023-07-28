@@ -10,6 +10,10 @@ exports.verify_credentials = async (credential) => {
       audience: process.env.CLIENT_ID,
     });
     const payload = ticket.getPayload();
+
+    if (payload.email != process.env.AUTHORIZED_EMAIL)
+      throw new Error("Invalid email");
+
     return payload;
   } catch (error) {
     console.log(`Error verifying credentials: ${error}`);
