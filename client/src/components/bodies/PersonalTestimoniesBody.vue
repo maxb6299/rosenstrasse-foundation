@@ -6,7 +6,7 @@
         <div class="small-group">
           <div v-for="(testimony, testimonyKey) in data" :key="testimonyKey">
             <div v-if="getCategory(category, testimony)">
-              <router-link :to="{name: 'individual-testimonies', params:{id: testimony._id, testimony: data}}">
+              <router-link :to="{name: 'individual-testimonies', params:{id: testimony._id}}">
                 <div>-{{ testimony.name }} by {{ testimony.author }}</div>
               </router-link>
               
