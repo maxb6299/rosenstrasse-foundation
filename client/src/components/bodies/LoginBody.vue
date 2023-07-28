@@ -1,36 +1,32 @@
 <template>
     <div class="menu">
-        <GoogleLogin v-show="!isSignedIn" :callback="signIn" />
-        <button v-show="isSignedIn" @click="signOut">Sign out</button>
+        <GoogleLogin v-show="!authenticateStore.getAuthentication" :callback="signIn" />
+        <button v-show="authenticateStore.getAuthentication" @click="signOut">Sign out</button>
     </div>
 </template>
 
 <script>
 import cookieHelper from '@/_helpers/cookie.js'
+import { useAuthenticateStore } from "@/store/AuthenticateStore.js";
 
 export default {
-    data() {
-        return {
-            isSignedIn: false,
-        }
+    setup() {
+        const authenticateStore = useAuthenticateStore();
+        return { authenticateStore }
     },
+    
     methods: {
         signOut() {
             cookieHelper.deleteCookie('id_token');
-            this.isSignedIn = false;
+            this.authenticateStore.checkAuthentication();
         },
         async signIn(response) {
             let dataString = JSON.stringify(response.credential);
             document.cookie = `id_token=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
 
-            cookieHelper.deleteCookie('settings');
-            this.isSignedIn = true;
+            this.authenticateStore.checkAuthentication();
         }
     },
-
-    async created() {
-        this.isSignedIn = (cookieHelper.readCookie('id_token') != null)
-    }
 }
 </script>
 
