@@ -1,4 +1,5 @@
 import { v4 as generateNewId } from "uuid";
+import cookieHelper from "./cookie.js";
 
 const URL = `https://rosenstrassefoundation-backend-dev.vercel.app`;
 
@@ -33,19 +34,27 @@ export default {
 
     const URI = `${URL}/${database}/${newMember._id}`;
     const BODY = JSON.stringify(newMember);
+    const credential = this.getCredentials();
 
     await fetch(URI, {
       method: "POST",
       body: BODY,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${credential}`,
+      },
     });
   },
   async deleteItem(database, id) {
     const URI = `${URL}/${database}/${id}`;
+    const credential = this.getCredentials();
 
     await fetch(URI, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${credential}`,
+      },
     });
   },
 
@@ -61,9 +70,13 @@ export default {
         formdata.append("image", fileInput.files[0]);
 
         const URI = `${URL}/${database}/${id}/image`;
+        const credential = this.getCredentials();
 
         await fetch(URI, {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${credential}`,
+          },
           body: formdata,
           enctype: "multipart/form-data",
           redirect: "follow",
@@ -96,9 +109,18 @@ export default {
 
   async deleteImage(database, id) {
     const URI = `${URL}/${database}/${id}/image`;
+    const credential = this.getCredentials();
+
     await fetch(URI, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${credential}`,
+      },
     });
+  },
+
+  getCredentials() {
+    return cookieHelper.readCookie("id_token");
   },
 };
