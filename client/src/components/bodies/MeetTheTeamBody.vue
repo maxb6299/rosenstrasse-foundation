@@ -24,7 +24,9 @@
           <div class="team-card-text-name">{{ value.name }}</div>
           <div class="team-card-text-position">{{ value.position }}</div>
 
-          <a class="team-card-text-readmore">Read more</a>
+          <router-link class="team-card-text-readmore" :to="{ name: 'team-member', params: { id: value._id } }">
+            Read more
+          </router-link>
         </div>
 
         <div v-if="authenticateStore.getAuthentication">

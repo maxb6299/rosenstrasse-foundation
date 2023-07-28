@@ -17,6 +17,11 @@ const routes = [
     name: "meet-the-team",
     component: () => import("@/views/MeetTheTeamView.vue"),
   },
+  {
+    path: "/meet-the-team/:id",
+    name: "team-member",
+    component: () => import("@/views/TeamMemberView.vue"),
+  },
 
   {
     path: "/personal-testimonies",
