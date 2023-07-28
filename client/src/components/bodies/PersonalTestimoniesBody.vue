@@ -6,32 +6,19 @@
         <div class="small-group">
           <div v-for="(testimony, testimonyKey) in data" :key="testimonyKey">
             <div v-if="getCategory(category, testimony)">
-              <div>-{{ testimony.name }}</div>
-              <div v-if="true">
-                <div>{{ testimony.description }}</div>
-                <div class="author">Written By {{ testimony.author }}</div>
-                <div class="gallery">
-                    <img 
-                    v-for="(imageId, imageKey) in testimony.galleryIds"
-                    :key="imageKey"
-                    class="testimonyImage"
-                    :src="getImageUrl(imageId)"
-                    onerror="this.src='/assets/placeholder.png'"
-                    alt="Team Member Image"
-                    style="height: 300px"
-                  />
-                </div>
-                <div v-if="authenticateStore.getAuthentication">
-                  <button @click="saveNewImage(testimony._id)">Save New Image</button>
-                  <button @click="deleteItem(testimony._id)">Delete</button>
-                </div>
+              <router-link :to="{name: 'individual-testimonies', params:{id: testimony._id, testimony: data}}">
+                <div>-{{ testimony.name }} by {{ testimony.author }}</div>
+              </router-link>
+              
+              <div v-if="authenticateStore.getAuthentication">
+                <button @click="saveNewImage(testimony._id)">Save New Image</button>
+                <button @click="deleteItem(testimony._id)">Delete</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
     <div v-if="authenticateStore.getAuthentication">
       <form @submit.prevent="saveNewItem">
         Name: <input required v-model="newTestimony.name" /> Description:
@@ -105,9 +92,6 @@ export default {
     async getData() {
       this.data = await databaseHelper.getData(this.databaseName);
     },
-    getImageUrl(id) {
-      return databaseHelper.getImageUrl(this.databaseName, id);
-    },
     async saveNewItem() {
       await databaseHelper.saveNewItem(this.databaseName, this.newTestimony);
       await this.getData();
@@ -132,9 +116,3 @@ export default {
 };
 </script>
 
-<style style="scss">
-.author {
-  font-weight: 400;
-  font-style: italic;
-}
-</style>
