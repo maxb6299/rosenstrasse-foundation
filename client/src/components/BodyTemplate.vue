@@ -54,4 +54,22 @@ body {
   line-height: normal;
   text-decoration-line: underline;
 }
+
+@media only screen and (max-width: 900px) {
+  .body-items {
+    padding: 5px 0px;
+    gap: 16px;
+  }
+  .page-body {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .body-title {
+    width: 75%;
+    padding: 11px 16px 16px 16px;
+
+    font-size: 26px
+  }
+}
 </style>

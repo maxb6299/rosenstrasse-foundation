@@ -56,3 +56,27 @@ h1 {
     font-size: 24px;
     text-decoration-line: none;
 }
+
+@media only screen and (max-width: 900px) {
+    * {
+        font-size: 14px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    .title {
+        font-size: 26px;
+    }
+
+    .big-group {
+        gap: 18px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .blue-button {
+        padding: 8px;
+        font-size: 16px;
+    }
+}

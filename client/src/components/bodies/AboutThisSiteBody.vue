@@ -1,8 +1,8 @@
 <template>
     <div class="big-group">
-        <div class="big-group" style="flex-direction: row;">
+        <div class="big-group image-and-text" style="flex-direction: row;">
             <div>
-                <img src="@/../public/assets/about.png" alt="image" style="width: 450px;height: 303px;">
+                <img src="@/../public/assets/about.png" alt="image">
                 <div style="font-size: 16px;font-style: italic;">Frieda Thimm Rosenau with Heidi’s father, Werner, born June 28, 1929</div>
             </div>
             <div class="big-group">
@@ -34,3 +34,20 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+img {
+    width: 450px;
+    height: 303px;
+}
+
+@media only screen and (max-width: 900px) {
+    img {
+       width: 225px;
+       height: 150px; 
+    }    
+    .image-and-text {
+        flex-wrap: wrap;
+    }
+}
+</style>

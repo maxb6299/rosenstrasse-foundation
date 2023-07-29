@@ -2719,3 +2719,11 @@ Dept. Of Modern Languages and Literatures, the College of William and Mary`
     }
 }
 </script>
+
+<style>
+@media only screen and (max-width: 900px) {
+    pre {
+        font-size: 10px;
+    }
+}
+</style>

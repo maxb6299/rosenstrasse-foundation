@@ -189,4 +189,40 @@ export default {
   font-size: 14px;
   font-weight: 500;
 }
+
+@media only screen and (max-width: 900px) {
+  .cards {
+    padding: 12px 0px;
+    gap: 12px;
+  }
+
+  .card {
+    gap: 5px;
+    padding: 4px;
+    border-radius: 2px;
+  }
+
+  .team-card-text {
+    width: 100px;
+  }
+
+  .team-card-image {
+    width: 125px;
+    height: 125px;
+    flex-shrink: 0;
+  }
+
+  .team-card-text-name {
+    font-size: 18px;
+  }
+
+  .team-card-text-position {
+    font-size: 16px;
+  }
+
+  .team-card-text-readmore {
+    font-size: 14px;
+  }
+  
+}
 </style>

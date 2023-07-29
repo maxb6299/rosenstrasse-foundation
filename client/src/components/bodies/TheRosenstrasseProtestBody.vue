@@ -1,8 +1,8 @@
 <template>
     <div class="big-group">
-        <div class="big-group" style="flex-direction: row; align-items: center;">
+        <div class="big-group image-and-text" style="flex-direction: row; align-items: center;">
             <div>
-                <img src="@/../public/assets/rosenstrasse-protest.webp" alt="image" style="width:250px">
+                <img src="@/../public/assets/rosenstrasse-protest.webp" alt="image">
                 <div style="font-size: 16px;font-style: italic;">A photo of the Jewish Federation on Rosenstrasse where the Jewish husbands were held. The protests took place in the street around this building.</div>
             </div>
             <div class="big-group">
@@ -17,3 +17,18 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+img {
+    width: 250px;
+}
+
+@media only screen and (max-width: 900px) {
+    img {
+        width: 150px;
+    }
+    .image-and-text {
+        flex-wrap: wrap;
+    }
+}
+</style>
