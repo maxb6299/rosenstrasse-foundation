@@ -61,4 +61,25 @@ export default {
     display: flex;
     justify-content: flex-start;
 }
+
+@media only screen and (max-width: 900px) {
+    * {
+    font-size: 14px;
+    }
+    .nav-dropdown a {
+    border-bottom: 3px solid transparent;
+    transition: 0.4s;
+    }
+
+    .nav-dropdown-button {
+        padding: 0px;
+    }
+    .nav-dropdown {
+        padding: 0px;
+    }
+
+    .nav-dropdown svg{
+        display: none;
+    }
+}
 </style>

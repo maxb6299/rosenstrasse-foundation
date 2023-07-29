@@ -135,4 +135,18 @@ nav {
   display: block;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 900px) {
+  nav {
+    height: 70px;
+  }
+  .navbar {
+    max-width: 400px;
+    gap: 5px;
+    justify-content: space-around;
+  }
+  .navbar img {
+    width: 70px;
+  }
+}
 </style>
