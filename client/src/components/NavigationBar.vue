@@ -39,7 +39,7 @@ export default {
       about: [
         {
           title: "About This Site",
-          link: "about-this-site"
+          link: "/about-this-site"
         },
         {
           title: "Meet The Team",
@@ -49,59 +49,59 @@ export default {
       learn: [
         {
           title: "Personal Testimonies",
-          link: "personal-testimonies"
+          link: "/personal-testimonies"
         },
         {
           title: "The Rosenstrasse Protest",
-          link: "the-rosenstrasse-protest"
+          link: "/the-rosenstrasse-protest"
         },
         {
           title: "Timeline",
-          link: "timeline"
+          link: "/timeline"
         }
       ],
       connect: [
         {
           title: "Contact Us",
-          link: "contact-us"
+          link: "/contact-us"
         },
         {
           title: "Donate",
-          link: "donate"
+          link: "/donate"
         },
         {
           title: "Gallery",
-          link: "gallery"
+          link: "/gallery"
         },
         {
           title: "Monthly Newsletters",
-          link: "monthly-newsletters"
+          link: "/monthly-newsletters"
         },
         {
           title: "News/Events",
-          link: "news-events"
+          link: "/news-events"
         }
       ],
       resources: [
         {
           title: "Documents",
-          link: "documents"
+          link: "/documents"
         },
         {
           title: "Forum",
-          link: "forum"
+          link: "/forum"
         },
         {
           title: "Media Resources",
-          link: "media-resources"
+          link: "/media-resources"
         },
         {
           title: "Sources Cited",
-          link: "sources-cited"
+          link: "/sources-cited"
         },
         {
           title: "Scholarly Debate",
-          link: "scholarly-debate"
+          link: "/scholarly-debate"
         }
       ]
     }
