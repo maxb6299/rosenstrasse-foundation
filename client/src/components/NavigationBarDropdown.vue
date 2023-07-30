@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-dropdown" @mouseenter="isOpen = true" @mouseleave="isOpen = false">
+    <div class="nav-dropdown" @mouseenter="isOpen = true" @mouseleave="isOpen = false" @click="isOpen = !isOpen">
         <div class="nav-dropdown-button">
             <a>{{ title }}</a>
             <svg viewBox="0 0 1030 638" width="10">
