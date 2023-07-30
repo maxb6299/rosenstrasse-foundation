@@ -20,12 +20,13 @@
       </div>
     </div>
     <div v-if="authenticateStore.getAuthentication">
-      <form @submit.prevent="saveNewItem">
+      <form class="small-group" @submit.prevent="saveNewItem">
         Name: <input required v-model="newTestimony.name" /> Description:
         <input required v-model="newTestimony.description" /> Author:
         <input required v-model="newTestimony.author" />
-        <div>
-          Category: Rosenstrasse Protest:
+        <div class="small-group">
+          <div>Category:</div> 
+          Rosenstrasse Protest:
           <input
             v-model="newTestimony.categories.rosenstrasseProtest"
             type="checkbox"

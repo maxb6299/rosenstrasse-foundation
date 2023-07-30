@@ -49,9 +49,18 @@ export default {
 }
 </script>
 
-<style style="scss">
+<style style="scss" scoped>
 .author {
     font-weight: 400;
     font-style: italic;
+}
+
+@media only screen and (max-width: 900px) {
+    img {
+        width: 100%;
+        height: 0;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+    }
 }
 </style>
