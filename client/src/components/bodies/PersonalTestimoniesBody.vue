@@ -91,7 +91,8 @@ export default {
       else if (category == 'German Civil Courage') return testimony.categories.germanCivilCourage;
     },
     async getData() {
-      this.data = await databaseHelper.getData(this.databaseName);
+      const unsortedData = await databaseHelper.getData(this.databaseName);
+      this.data = unsortedData.sort((a, b) => a.name.localeCompare(b.name));
     },
     async saveNewItem() {
       await databaseHelper.saveNewItem(this.databaseName, this.newTestimony);
