@@ -12,5 +12,9 @@
         alt="Donate"
       />
     </a>
+    <img style="width:800px"
+      src="@/../public/assets/homepage-image.webp"
+      alt="Document"
+    />
   </div>
 </template>
