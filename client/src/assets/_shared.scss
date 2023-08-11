@@ -55,6 +55,11 @@ h1 {
     text-align: center;
     font-size: 24px;
     text-decoration-line: none;
+
+    &:hover {
+        background-color: darken($lightBlue, 10%);
+        cursor: pointer;
+    }
 }
 
 @media only screen and (max-width: 900px) {
