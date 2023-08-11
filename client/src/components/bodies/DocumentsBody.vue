@@ -17,7 +17,7 @@ export default {
                 },
                 {
                     title: 'Names and Messages of Protestors at Rosenstrasse from the Wiener Holocaust Library Collections',
-                    link: ''
+                    link: 'https://4dac91b8-5102-4943-bb53-b8e5c1e67f53.filesusr.com/ugd/4c4715_c0d1752eb03d4b6f96ad153a8ba27a9f.pdf'
                 },
                 {
                     title: 'German and English Translation of Hitler’s order in 1938 to divide intermarried Jews into privileged and non-privileged',
@@ -41,7 +41,7 @@ export default {
                 },
                 {
                     title: 'After 80 years: Why we commemorate the Rosenstrasse protest - Jerusalem Post Article By Nathan Stoltzfus and Mordecai Paldiel [March 6, 2023]',
-                    link: ''
+                    link: 'https://geschichtedergegenwart.ch/die-frauen-der-rosenstrasse-ns-widerstand-als-problem-der-ns-geschichtsschreibung/'
                 },
                 {
                     title: `Appendices for “Protest in Hitler's "national community": popular unrest and the Nazi response”`,
