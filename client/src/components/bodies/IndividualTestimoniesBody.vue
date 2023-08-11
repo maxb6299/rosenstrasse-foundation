@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="big-group">
         <div class="title">{{ testimony.name }}</div>
         <div>{{ testimony.description }}</div>
         <div class="author">Written By {{ testimony.author }}</div>
