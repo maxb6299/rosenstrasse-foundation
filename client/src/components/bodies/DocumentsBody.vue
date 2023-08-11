@@ -49,6 +49,16 @@ export default {
                 }
             ]
         }
+    },
+
+    methods: {
+        sortData() {
+            this.documents = this.documents.sort((a, b) => a.title.localeCompare(b.title));
+        }
+    },
+
+    beforeMount() {
+        this.sortData();
     }
 }
 </script>
