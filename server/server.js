@@ -8,6 +8,9 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+const newsDatabase = require("./routes/newsDatabase");
+app.use("/news", newsDatabase);
+
 const testimonyDatabase = require("./routes/testimonyDatabase");
 app.use("/testimonies", testimonyDatabase);
 
