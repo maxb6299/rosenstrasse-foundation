@@ -2,7 +2,7 @@
     <div class="big-group" style="align-items: center;">
         <div>
             <div class=title>Email us at: </div>
-            <div class="blue-button" onclick="window.open('mailto:rosenstrassefoundation@gmail.com', '_blank')" style="max-width: fit-content; padding: 12px;">
+            <div class="blue-button" onclick="window.open('mailto:rosenstrassefoundation@gmail.com', '_blank')">
                 rosenstrassefoundation@gmail.com
             </div>
         </div>
