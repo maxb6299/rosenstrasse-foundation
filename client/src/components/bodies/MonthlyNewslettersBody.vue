@@ -42,7 +42,8 @@ export default {
 
     methods: {
         async getData() {
-            this.data = await databaseHelper.getData(this.databaseName);
+            const DATABASE_DATA = await databaseHelper.getData(this.databaseName);
+            this.data = Object.values(DATABASE_DATA).reverse();
         },
         async saveNewItem() {
             await databaseHelper.saveNewItem(this.databaseName, this.newNews);
