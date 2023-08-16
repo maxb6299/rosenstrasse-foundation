@@ -1,30 +1,61 @@
 <template>
     <div class="big-group">
-        <div v-for="(newsItem, newsItemKey) in news" :key="newsItemKey">
+        <div v-for="(newsItem, newsItemKey) in data" :key="newsItemKey">
             <a class="blue-button" :href="newsItem.link" target="_blank">{{ newsItem.title }}</a>
+            <div v-if="authenticateStore.getAuthentication">
+                <button @click="deleteItem(newsItem._id)">Delete</button>
+            </div>
+        </div>
+
+        <div v-if="authenticateStore.getAuthentication">
+          <form class="small-group" @submit.prevent="saveNewItem">
+                Title: <input required v-model="newNews.title" />
+                Link: <input required v-model="newNews.link" />
+                <input type="submit" value="Save" />
+            </form>
         </div>
     </div>
 </template>
 
 <script>
+import databaseHelper from "@/_helpers/database.js";
+import { useAuthenticateStore } from "@/store/AuthenticateStore.js";
+
 export default {
+    setup() {
+        const authenticateStore = useAuthenticateStore();
+        return { authenticateStore }
+    },
+
     data() {
         return {
-            news: [
-                {
-                    title: "january",
-                    link: "https://www.google.com/"
-                },
-                {
-                    title: "febuary",
-                    link: "https://www.google.com/"
-                },
-                {
-                    title: "march",
-                    link: "https://www.google.com/"
-                },
-            ]
+            databaseName: "news",
+
+            data: {},
+
+            newNews: {
+                title: '',
+                link: ''
+            },
         }
-    }
+    },
+
+    methods: {
+        async getData() {
+            this.data = await databaseHelper.getData(this.databaseName);
+        },
+        async saveNewItem() {
+            await databaseHelper.saveNewItem(this.databaseName, this.newNews);
+            await this.getData();
+        },
+        async deleteItem(id) {
+            await databaseHelper.deleteItem(this.databaseName, id);
+            await this.getData();
+        }
+    },
+
+    beforeMount() {
+        this.getData();
+    },
 }
 </script>
