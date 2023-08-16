@@ -19,5 +19,15 @@
             <div class="title">Conference Panels</div>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLhN7ydN2kL8kK8yV25IfRMb7cFteqpNtV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
+
+        <div>
+            <div class="title">Documentaries</div>
+            <a href="https://www.smithsonianchannel.com/episodes/9ja72x/searching-for-secrets-berlin-season-1-ep-4" target="_blank">
+                <img style="width:560px" src="@/../public/assets/documentary.webp">
+            </a>
+            <div style="font-size: 14px;">
+                The Foundation provided photos and archival material for this documentary by the Smithsonian. 
+            </div>
+        </div>
     </div>
 </template>
