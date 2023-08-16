@@ -70,10 +70,6 @@ export default {
           link: "/donate"
         },
         {
-          title: "Gallery",
-          link: "/gallery"
-        },
-        {
           title: "Monthly Newsletters",
           link: "/monthly-newsletters"
         },

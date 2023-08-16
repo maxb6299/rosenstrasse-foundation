@@ -56,11 +56,6 @@ const routes = [
     component: () => import("@/views/DonateView.vue"),
   },
   {
-    path: "/gallery",
-    name: "gallery",
-    component: () => import("@/views/GalleryView.vue"),
-  },
-  {
     path: "/monthly-newsletters",
     name: "monthly-newsletters",
     component: () => import("@/views/MonthlyNewslettersView.vue"),
