@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BodyTemplate title="Events & Interpretations of the Protest">
+        <BodyTemplate title="Forum: Events & Interpretations of the Rosentstrasse Protest">
             <ForumBody></ForumBody>
         </BodyTemplate>
     </div>
