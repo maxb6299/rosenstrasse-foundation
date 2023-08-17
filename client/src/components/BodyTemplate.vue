@@ -45,6 +45,7 @@ body {
   width: 630px;
   padding: 21px 32px 32px 32px; 
   background: #9dbfd2;
+  text-align: center;
 
   color: #000;
   font-family: Crimson Pro;

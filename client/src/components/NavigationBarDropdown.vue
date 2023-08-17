@@ -36,7 +36,6 @@ export default {
 .nav-dropdown a {
   color: white;
   position: relative;
-  text-align: center;
   border-bottom: 3px solid transparent;
   transition: 0.4s;
 }

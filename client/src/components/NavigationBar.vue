@@ -84,7 +84,7 @@ export default {
           link: "/documents"
         },
         {
-          title: "Forum",
+          title: "Events & Interpretations of the Protest",
           link: "/forum"
         },
         {
