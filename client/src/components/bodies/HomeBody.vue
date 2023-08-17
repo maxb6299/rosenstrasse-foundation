@@ -12,9 +12,21 @@
         alt="Donate"
       />
     </a>
-    <img style="width:800px"
+    <img class="document"
       src="@/../public/assets/homepage-image.webp"
       alt="Document"
     />
   </div>
 </template>
+
+<style>
+img.document {
+  width:800px;
+}
+
+@media only screen and (max-width: 900px) {
+  img.document {
+    width: 600px;
+  }
+}
+</style>
