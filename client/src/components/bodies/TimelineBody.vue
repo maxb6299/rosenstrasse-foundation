@@ -2,8 +2,8 @@
     <div class="timeline-container">
         <div class="big-group">
             <div v-for="(item, key) in timelineData">
-                <div class="small-group blue-button">
-                    <div class="title" @click="item.isVisible = !item.isVisible">{{ item.date }}</div>
+                <div class="small-group blue-button" @click="item.isVisible = !item.isVisible">
+                    <div class="title" >{{ item.date }}</div>
                     <div v-if=item.isVisible>
                         {{ item.text }}
                     </div>
