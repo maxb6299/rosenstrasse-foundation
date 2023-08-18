@@ -137,12 +137,12 @@ nav {
     height: 70px;
   }
   .navbar {
-    max-width: 400px;
-    gap: 5px;
+    max-width: 300px;
+    gap: 0px;
     justify-content: space-around;
   }
   .navbar img {
-    width: 70px;
+    width: 60px;
   }
 }
 </style>
