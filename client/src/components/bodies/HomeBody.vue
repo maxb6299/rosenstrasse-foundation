@@ -26,7 +26,7 @@ img.document {
 
 @media only screen and (max-width: 900px) {
   img.document {
-    width: 600px;
+    width: 300px;
   }
 }
 </style>

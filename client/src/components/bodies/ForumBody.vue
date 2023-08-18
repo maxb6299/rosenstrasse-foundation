@@ -2,7 +2,7 @@
     <div>
         <div class="big-group">
             <div class="title">Film Reviews</div>
-            <div v-for="(item, itemKey) in filmReviews">
+            <div class="review" v-for="(item, itemKey) in filmReviews">
                 <div @click="item.isVisible = !item.isVisible" class="blue-button">
                     {{ item.title }}
                 </div>
@@ -10,7 +10,7 @@
             </div>
             
             <div class="title">Historical Media Reviews</div>
-            <div v-for="(item, itemKey) in historicalMediaReviews">
+            <div class="review" v-for="(item, itemKey) in historicalMediaReviews">
                 <div @click="item.isVisible = !item.isVisible" class="blue-button">
                     {{ item.title }}
                 </div>
@@ -2724,6 +2724,12 @@ Dept. Of Modern Languages and Literatures, the College of William and Mary`
 @media only screen and (max-width: 900px) {
     pre {
         font-size: 10px;
+    }
+
+    .review {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 </style>
