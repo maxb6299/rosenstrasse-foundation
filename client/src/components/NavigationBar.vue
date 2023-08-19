@@ -73,10 +73,6 @@ export default {
           title: "Monthly Newsletters",
           link: "/monthly-newsletters"
         },
-        {
-          title: "News/Events",
-          link: "/news-events"
-        }
       ],
       resources: [
         {
