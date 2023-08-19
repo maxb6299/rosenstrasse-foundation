@@ -21,10 +21,6 @@ export default {
         return {
             publications: [
                 {
-                    title: 'OSS Report: [April 1, 1943]',
-                    link: 'https://4dac91b8-5102-4943-bb53-b8e5c1e67f53.filesusr.com/ugd/4c4715_9e68ff5f2815443eb2c36be74c87ea79.pdf'
-                },
-                {
                     title: `Historical Evidence and Plausible History: Interpreting the Berlin Gestapo's Attempted "Final Roundup" of Jews (also known as the "Factory Action")`,
                     link: 'https://4dac91b8-5102-4943-bb53-b8e5c1e67f53.filesusr.com/ugd/4c4715_838cb1eec51943de8116d9ea8691c46a.pdf'
                 },
@@ -46,6 +42,10 @@ export default {
                 },
             ],
             documents: [
+                {
+                    title: 'OSS Report: [April 1, 1943]',
+                    link: 'https://4dac91b8-5102-4943-bb53-b8e5c1e67f53.filesusr.com/ugd/4c4715_9e68ff5f2815443eb2c36be74c87ea79.pdf'
+                },
                 {
                     title: 'Names and Messages of Protestors at Rosenstrasse from the Wiener Holocaust Library Collections',
                     link: 'https://4dac91b8-5102-4943-bb53-b8e5c1e67f53.filesusr.com/ugd/4c4715_c0d1752eb03d4b6f96ad153a8ba27a9f.pdf'
