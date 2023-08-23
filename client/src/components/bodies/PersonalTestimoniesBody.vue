@@ -3,7 +3,7 @@
     <div class="big-group">
       <div v-for="(category, categoryKey) in categories" :key="categoryKey">
         <div class="title">{{ category }}:</div>
-        <div class="small-group">
+        <div>
           <div v-for="(testimony, testimonyKey) in data" :key="testimonyKey">
             <div v-if="getCategory(category, testimony)">
               <router-link :to="{name: 'individual-testimonies', params:{id: testimony._id}}">
@@ -14,6 +14,8 @@
                 <button @click="saveNewImage(testimony._id)">Save New Image</button>
                 <button @click="deleteItem(testimony._id)">Delete</button>
               </div>
+
+              <br>
             </div>
           </div>
         </div>
