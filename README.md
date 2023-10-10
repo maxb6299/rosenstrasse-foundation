@@ -2,11 +2,12 @@
 
 ![image](https://github.com/maxb6299/rosenstrasse-foundation/assets/126419161/671a7cc9-b2af-41fc-819b-c012772ca2c6)
 
-This is the website for The Rosenstrasse Foundation. As of right now, this repository is not officially deployed, but their website is: http://rosenstrassefoundation.org/
+This is the website for The Rosenstrasse Foundation. As of right now, this repository is not officially deployed.
 
 The unofficial deployment of this repository is at: https://rosenstrassefoundation-dev.vercel.app/
 
-The Rosenstrasse Foundation needed a website to display information about their organization.
+The Rosenstrasse Foundation's current official website is (not made by me): http://rosenstrassefoundation.org/
+
 
 ## Key Features
 
